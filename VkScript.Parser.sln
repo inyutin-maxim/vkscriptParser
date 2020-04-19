@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{AEDE7549-053F-4EA2-8577-04C606F67DAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkScript.Parser", "src\VkScript.Parser\VkScript.Parser.csproj", "{AA48C020-E8DD-426D-B9E0-F60E0512B64C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VkScript.Parser.Tests", "tests\VkScript.Parser.Tests\VkScript.Parser.Tests.csproj", "{405C7384-0A81-459B-9D42-940ED8DBA33A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEDE7549-053F-4EA2-8577-04C606F67DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEDE7549-053F-4EA2-8577-04C606F67DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA48C020-E8DD-426D-B9E0-F60E0512B64C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA48C020-E8DD-426D-B9E0-F60E0512B64C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA48C020-E8DD-426D-B9E0-F60E0512B64C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA48C020-E8DD-426D-B9E0-F60E0512B64C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{405C7384-0A81-459B-9D42-940ED8DBA33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405C7384-0A81-459B-9D42-940ED8DBA33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{405C7384-0A81-459B-9D42-940ED8DBA33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{405C7384-0A81-459B-9D42-940ED8DBA33A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
