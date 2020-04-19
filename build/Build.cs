@@ -47,6 +47,11 @@ class Build : NukeBuild
 				.SetProjectFile(Solution));
 		});
 
+	private Target RunTests => _ => _.Executes(() =>
+	{
+		DotNetTest(s => s.SetProjectFile("VkScript.Parser.Tests"));
+	});
+
 	Target Compile => _ => _
 		.DependsOn(Restore)
 		.Executes(() =>
