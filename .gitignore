@@ -3,3 +3,9 @@ obj/
 /packages/
 /.idea/*
 .tmp/
+.vs/VkScript.Parser/v16/.suo
+.vs/VkScript.Parser/DesignTimeBuild/.dtbcache
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
