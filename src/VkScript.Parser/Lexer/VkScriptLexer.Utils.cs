@@ -16,8 +16,8 @@ namespace VkScript.Parser.Lexer
 		private static readonly VkScriptStaticLexemeDefinition[] Keywords =
 		{
 			new VkScriptStaticLexemeDefinition("while", VkScriptLexemeType.While),
+			new VkScriptStaticLexemeDefinition("do", VkScriptLexemeType.Do),
 			new VkScriptStaticLexemeDefinition("if", VkScriptLexemeType.If),
-			new VkScriptStaticLexemeDefinition("then", VkScriptLexemeType.Then),
 			new VkScriptStaticLexemeDefinition("else", VkScriptLexemeType.Else),
 			new VkScriptStaticLexemeDefinition("true", VkScriptLexemeType.True),
 			new VkScriptStaticLexemeDefinition("false", VkScriptLexemeType.False),
