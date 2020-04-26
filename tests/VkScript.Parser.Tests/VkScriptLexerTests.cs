@@ -30,12 +30,12 @@ namespace VkScript.Parser.Tests
 			var service = _mocker.CreateInstance<VkScriptLexer>();
 
 			// Act
-			var result = service.Parse("1+1");
+			var result = service.Parse("return 1;");
 
 			// Assert
 			Assert.NotNull(result);
 			Assert.NotEmpty(result);
-			Assert.Contains(result, x => x.Type == VkScriptLexemeType.Number);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Number);
 		}
 
 		[Fact]
@@ -351,6 +351,21 @@ namespace VkScript.Parser.Tests
 			Assert.NotNull(result);
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Else);
+		}
+
+		[Fact]
+		public void ContainsSingleWhileLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("while(true){}");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.While);
 		}
 	}
 }
