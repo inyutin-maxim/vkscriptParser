@@ -34,7 +34,7 @@ namespace VkScript.Parser.Lexer
 					continue;
 				}
 
-				if (CurrChar() == '"' || CurrChar() == '@' && NextChar() == '"' ||CurrChar() == '\'' || CurrChar() == '@' && NextChar() == '\'')
+				if (CurrChar() == '"' || CurrChar() == '\'')
 				{
 					ProcessStringLiteral();
 
@@ -205,8 +205,7 @@ namespace VkScript.Parser.Lexer
 		{
 			var start = GetPosition();
 
-			var isVerbatim = CurrChar() == '@';
-			Skip(isVerbatim ? 2 : 1);
+			Skip();
 
 			var startPos = GetPosition();
 			var sb = new StringBuilder();
@@ -216,7 +215,7 @@ namespace VkScript.Parser.Lexer
 			{
 				var ch = CurrChar();
 
-				if (!isEscaped && !isVerbatim && ch == '\\')
+				if (!isEscaped && ch == '\\')
 				{
 					isEscaped = true;
 
@@ -240,21 +239,11 @@ namespace VkScript.Parser.Lexer
 
 				switch (ch)
 				{
-					case '"' when isVerbatim && NextChar() == '"':
-						sb.Append('"');
-						Skip(2);
-
-						continue;
 					case '"':
 						Skip();
 						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPos, GetPosition(), sb.ToString()));
 
 						return;
-					case '\'' when isVerbatim && NextChar() == '"':
-						sb.Append('"');
-						Skip(2);
-
-						continue;
 					case '\'':
 						Skip();
 						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPos, GetPosition(), sb.ToString()));
