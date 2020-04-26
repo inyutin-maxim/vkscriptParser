@@ -59,8 +59,7 @@ namespace VkScript.Parser.Lexer
 		private static readonly VkScriptRegexLexemeDefinition[] RegexLexemes =
 		{
 			new VkScriptRegexLexemeDefinition(@"(0|[1-9][0-9]*)(\.[0-9]+)?", VkScriptLexemeType.Number),
-			new VkScriptRegexLexemeDefinition(@"([a-zA-Z_][0-9a-zA-Z_]*)", VkScriptLexemeType.Identifier),
-			new VkScriptRegexLexemeDefinition(@"#([^#]|##)*#[a-zA-Z]*", VkScriptLexemeType.Regex)
+			new VkScriptRegexLexemeDefinition(@"([a-zA-Z_][0-9a-zA-Z_]*)", VkScriptLexemeType.Identifier)
 		};
 
 	#region Helper methods
@@ -155,15 +154,6 @@ namespace VkScript.Parser.Lexer
 	#endregion
 
 	#region Escaping
-
-		/// <summary>
-		/// Обрабатывает содержимое литерала регулярных выражений.
-		/// </summary>
-		[DebuggerStepThrough]
-		private VkScriptLexeme TransformRegexLiteral(VkScriptLexeme lex)
-		{
-			return new VkScriptLexeme(VkScriptLexemeType.Regex, lex.StartLocation, lex.EndLocation, lex.Value.Replace(@"##", "#"));
-		}
 
 		/// <summary>
 		/// Возвращает экранированную версию данного символа.

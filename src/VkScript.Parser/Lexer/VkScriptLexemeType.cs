@@ -79,11 +79,6 @@
 		Identifier,
 
 		/// <summary>
-		/// Регулярное выражение
-		/// </summary>
-		Regex,
-
-		/// <summary>
 		/// Оператор сложения/конкатенации
 		/// </summary>
 		Plus,

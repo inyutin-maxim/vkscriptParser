@@ -60,14 +60,6 @@ namespace VkScript.Parser.Lexer
 						Error(LexerMessages.UnknownLexem);
 					}
 
-					switch (lex.Type)
-					{
-						case VkScriptLexemeType.Regex:
-							lex = TransformRegexLiteral(lex);
-
-							break;
-					}
-
 					Lexemes.Add(lex);
 				}
 
