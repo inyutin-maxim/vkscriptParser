@@ -108,9 +108,9 @@ namespace VkScript.Parser {
         /// <summary>
         ///   Looks up a localized string similar to LE1005: Неизвестный тип лексемы!.
         /// </summary>
-        internal static string UnknownLexem {
+        internal static string UnknownLexeme {
             get {
-                return ResourceManager.GetString("UnknownLexem", resourceCulture);
+                return ResourceManager.GetString("UnknownLexeme", resourceCulture);
             }
         }
     }

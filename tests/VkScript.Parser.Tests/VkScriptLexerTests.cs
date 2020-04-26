@@ -24,7 +24,7 @@ namespace VkScript.Parser.Tests
 		}
 
 		[Fact]
-		public void ContainsNumberLexeme()
+		public void ContainsSingleNumberLexeme()
 		{
 			// Arrange
 			var service = _mocker.CreateInstance<VkScriptLexer>();

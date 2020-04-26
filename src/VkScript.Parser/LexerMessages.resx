@@ -131,7 +131,7 @@
 	<data name="UnknownEscape" xml:space="preserve">
     <value>LE1004: Неизвестная экранированная последовательность: \{0}!</value>
   </data>
-	<data name="UnknownLexem" xml:space="preserve">
+	<data name="UnknownLexeme" xml:space="preserve">
     <value>LE1005: Неизвестный тип лексемы!</value>
   </data>
 </root>

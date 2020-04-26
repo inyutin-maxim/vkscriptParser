@@ -57,7 +57,7 @@ namespace VkScript.Parser.Lexer
 
 					if (lex == null)
 					{
-						Error(LexerMessages.UnknownLexem);
+						Error(LexerMessages.UnknownLexeme);
 					}
 
 					Lexemes.Add(lex);
@@ -129,12 +129,12 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		private void ProcessIndent()
 		{
-			var currIndent = 0;
+			var currentIndent = 0;
 
 			while (CurrChar() == ' ')
 			{
 				Skip();
-				currIndent++;
+				currentIndent++;
 			}
 
 			// empty line?
@@ -146,18 +146,18 @@ namespace VkScript.Parser.Lexer
 			// first line?
 			if (_indentLookup.Count == 0)
 			{
-				_indentLookup.Push(currIndent);
+				_indentLookup.Push(currentIndent);
 			}
 
 			// indent increased
-			else if (currIndent > _indentLookup.Peek())
+			else if (currentIndent > _indentLookup.Peek())
 			{
-				_indentLookup.Push(currIndent);
+				_indentLookup.Push(currentIndent);
 				AddLexeme(VkScriptLexemeType.Indent, GetPosition());
 			}
 
 			// indent decreased
-			else if (currIndent < _indentLookup.Peek())
+			else if (currentIndent < _indentLookup.Peek())
 			{
 				while (true)
 				{
@@ -171,7 +171,7 @@ namespace VkScript.Parser.Lexer
 
 					AddLexeme(VkScriptLexemeType.Dedent, GetPosition());
 
-					if (currIndent == _indentLookup.Peek())
+					if (currentIndent == _indentLookup.Peek())
 					{
 						break;
 					}
