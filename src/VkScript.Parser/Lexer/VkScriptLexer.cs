@@ -385,7 +385,7 @@ namespace VkScript.Parser.Lexer
 			var result = new List<VkScriptLexeme>(Lexemes.Count);
 
 			var isStart = true;
-			VkScriptLexeme nl = null;
+			VkScriptLexeme newLine = null;
 
 			foreach (var curr in Lexemes)
 			{
@@ -393,18 +393,18 @@ namespace VkScript.Parser.Lexer
 				{
 					if (!isStart)
 					{
-						nl = curr;
+						newLine = curr;
 					}
 				} else
 				{
-					if (nl != null)
+					if (newLine != null)
 					{
 						if (!curr.Type.IsAnyOf(eaters))
 						{
-							result.Add(nl);
+							result.Add(newLine);
 						}
 
-						nl = null;
+						newLine = null;
 					}
 
 					isStart = false;
