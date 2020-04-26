@@ -131,6 +131,16 @@
 		/// <summary>
 		/// Оператор не равенства
 		/// </summary>
-		NotEqual
+		NotEqual,
+
+		/// <summary>
+		/// Открывающая круглая скобка
+		/// </summary>
+		RoundOpen,
+
+		/// <summary>
+		/// Закрывающая круглая скобка
+		/// </summary>
+		RoundClose
 	}
 }

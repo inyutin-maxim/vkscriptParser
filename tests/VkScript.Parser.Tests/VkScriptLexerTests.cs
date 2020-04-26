@@ -157,5 +157,95 @@ namespace VkScript.Parser.Tests
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.NotEqual);
 		}
+
+		[Fact]
+		public void ContainsSingleIfLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("if (true)");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.If);
+		}
+
+		[Fact]
+		public void ContainsSingleRoundOpenLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("if (true)");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RoundOpen);
+		}
+
+		[Fact]
+		public void ContainsSingleRoundCloseLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("if (true)");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RoundClose);
+		}
+
+		[Fact]
+		public void ContainsSingleTrueLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("if (true)");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.True);
+		}
+
+		[Fact]
+		public void ContainsSingleFalseLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("if (false)");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.False);
+		}
+
+		[Fact]
+		public void ContainsSingleReturnLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("return true;");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Return);
+		}
 	}
 }
