@@ -39,6 +39,7 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("*", VkScriptLexemeType.Multiply),
 			new VkScriptStaticLexemeDefinition("/", VkScriptLexemeType.Divide),
 			new VkScriptStaticLexemeDefinition("=", VkScriptLexemeType.Assign),
+			new VkScriptStaticLexemeDefinition("!=", VkScriptLexemeType.NotEqual),
 			new VkScriptStaticLexemeDefinition(";", VkScriptLexemeType.Semicolon),
 		};
 

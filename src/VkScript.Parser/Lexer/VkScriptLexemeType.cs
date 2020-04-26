@@ -126,6 +126,11 @@
 		/// <summary>
 		/// Точка с запятой
 		/// </summary>
-		Semicolon
+		Semicolon,
+
+		/// <summary>
+		/// Оператор не равенства
+		/// </summary>
+		NotEqual
 	}
 }
