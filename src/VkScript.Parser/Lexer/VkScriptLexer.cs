@@ -12,13 +12,11 @@ namespace VkScript.Parser.Lexer
 	public partial class VkScriptLexer : IVkScriptLexer
 	{
 		/// <summary>
-		/// Source code as single string.
+		/// Исходный код в виде одной строки.
 		/// </summary>
 		private string _source;
 
-		/// <summary>
-		/// Processes the input string into a list of lexemes.
-		/// </summary>
+		/// <inheritdoc />
 		public List<VkScriptLexeme> Parse(string sourceCode)
 		{
 			_source = sourceCode;
@@ -36,7 +34,7 @@ namespace VkScript.Parser.Lexer
 					continue;
 				}
 
-				if (CurrChar() == '"' || CurrChar() == '@' && NextChar() == '"')
+				if (CurrChar() == '"' || CurrChar() == '@' && NextChar() == '"' ||CurrChar() == '\'' || CurrChar() == '@' && NextChar() == '\'')
 				{
 					ProcessStringLiteral();
 
@@ -248,6 +246,16 @@ namespace VkScript.Parser.Lexer
 
 						continue;
 					case '"':
+						Skip();
+						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPos, GetPosition(), sb.ToString()));
+
+						return;
+					case '\'' when isVerbatim && NextChar() == '"':
+						sb.Append('"');
+						Skip(2);
+
+						continue;
+					case '\'':
 						Skip();
 						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPos, GetPosition(), sb.ToString()));
 
