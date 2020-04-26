@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using JetBrains.Annotations;
 
 namespace VkScript.Parser.Model.Text
 {
+	[UsedImplicitly]
 	public class TextSpan
 	{
 		public TextSpan(int start, int length)
@@ -40,6 +40,12 @@ namespace VkScript.Parser.Model.Text
 		/// <summary>
 		/// Проверяет, является ли span пустым
 		/// </summary>
-		public bool IsEmpty => this.Length == 0;
+		public bool IsEmpty => Length == 0;
+
+		/// <inheritdoc />
+		public override string ToString()
+		{
+			return $"[{Start}..{End})";
+		}
 	}
 }

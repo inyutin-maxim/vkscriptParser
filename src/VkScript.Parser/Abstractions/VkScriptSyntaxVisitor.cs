@@ -10,10 +10,7 @@ namespace VkScript.Parser.Abstractions
 		/// </summary>
 		public virtual void Visit(VkScriptSyntaxNode node)
 		{
-			if (node != null)
-			{
-				node.Accept(this);
-			}
+			node?.Accept(this);
 		}
 	}
 }

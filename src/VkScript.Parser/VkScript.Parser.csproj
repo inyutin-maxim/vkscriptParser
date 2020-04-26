@@ -4,4 +4,32 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="CompilerMessages.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>CompilerMessages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="LexerMessages.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>LexerMessages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="CompilerMessages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>CompilerMessages.resx</DependentUpon>
+      </Compile>
+      <Compile Update="LexerMessages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>LexerMessages.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

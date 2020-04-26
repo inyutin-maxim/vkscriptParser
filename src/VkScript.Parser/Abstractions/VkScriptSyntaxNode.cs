@@ -1,4 +1,4 @@
-using System;
+using JetBrains.Annotations;
 using VkScript.Parser.Model.Text;
 
 namespace VkScript.Parser.Abstractions
@@ -15,22 +15,26 @@ namespace VkScript.Parser.Abstractions
 		/// <summary>
 		/// Родитель
 		/// </summary>
-		private VkScriptSyntaxNode Parent { get; }
+		[UsedImplicitly]
+		public VkScriptSyntaxNode Parent { get; }
 
 		/// <summary>
 		/// Тип
 		/// </summary>
-		private Type Type { get; }
+		[UsedImplicitly]
+		public VkScriptSyntaxNodeTypes Type { get; }
 
 		/// <summary>
 		/// Местоположение в коде
 		/// </summary>
-		private TextSpan TextSpan{ get; }
+		[UsedImplicitly]
+		public TextSpan TextSpan { get; }
 
 		/// <summary>
 		/// Значение
 		/// </summary>
-		private string Value { get; }
+		[UsedImplicitly]
+		public string Value { get; }
 
 		public abstract void Accept(VkScriptSyntaxVisitor visitor);
 	}
