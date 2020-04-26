@@ -43,6 +43,11 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition(";", VkScriptLexemeType.Semicolon),
 			new VkScriptStaticLexemeDefinition("(", VkScriptLexemeType.RoundOpen),
 			new VkScriptStaticLexemeDefinition(")", VkScriptLexemeType.RoundClose),
+			new VkScriptStaticLexemeDefinition("[", VkScriptLexemeType.SquareOpen),
+			new VkScriptStaticLexemeDefinition("]", VkScriptLexemeType.SquareClose),
+			new VkScriptStaticLexemeDefinition("{", VkScriptLexemeType.CurlyOpen),
+			new VkScriptStaticLexemeDefinition("}", VkScriptLexemeType.CurlyClose),
+			new VkScriptStaticLexemeDefinition(",", VkScriptLexemeType.Comma),
 		};
 
 		/// <summary>

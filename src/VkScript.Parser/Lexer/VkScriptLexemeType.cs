@@ -141,6 +141,31 @@
 		/// <summary>
 		/// Закрывающая круглая скобка
 		/// </summary>
-		RoundClose
+		RoundClose,
+
+		/// <summary>
+		/// Открывающая квадратная скобка
+		/// </summary>
+		SquareOpen,
+
+		/// <summary>
+		/// Закрывающая квадратная скобка
+		/// </summary>
+		SquareClose,
+
+		/// <summary>
+		/// Открывающая фигурная скобка
+		/// </summary>
+		CurlyOpen,
+
+		/// <summary>
+		/// Закрывающая фигурная скобка
+		/// </summary>
+		CurlyClose,
+
+		/// <summary>
+		/// Запятая
+		/// </summary>
+		Comma
 	}
 }
