@@ -53,6 +53,7 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("}", VkScriptLexemeType.CurlyClose),
 			new VkScriptStaticLexemeDefinition(",", VkScriptLexemeType.Comma),
 			new VkScriptStaticLexemeDefinition("<<", VkScriptLexemeType.LeftShift),
+			new VkScriptStaticLexemeDefinition(">>", VkScriptLexemeType.RightShift),
 			new VkScriptStaticLexemeDefinition("<", VkScriptLexemeType.Less),
 			new VkScriptStaticLexemeDefinition(">", VkScriptLexemeType.Greater),
 			new VkScriptStaticLexemeDefinition("||", VkScriptLexemeType.Or),
