@@ -189,8 +189,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Оператор равенства
 		/// </summary>
-		Equal
+		Equal,
 
-
+		/// <summary>
+		/// Логическое ИЛИ
+		/// </summary>
+		Or
 	}
 }
