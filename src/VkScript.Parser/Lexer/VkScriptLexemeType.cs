@@ -204,6 +204,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Логическое НЕ
 		/// </summary>
-		Not
+		Not,
+
+		/// <summary>
+		/// Побитовое И
+		/// </summary>
+		BitAnd
 	}
 }
