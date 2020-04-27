@@ -244,6 +244,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Правый сдвиг с заполнением нулями
 		/// </summary>
-		RightFillingShift
+		RightFillingShift,
+
+		/// <summary>
+		/// Фильтр массива по параметру
+		/// </summary>
+		ArrayFilter
 	}
 }

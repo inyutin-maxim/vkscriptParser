@@ -667,5 +667,20 @@ namespace VkScript.Parser.Tests
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Delete);
 		}
+
+		[Fact]
+		public void ContainsSingleArrayFilterLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("return c@.last_name;");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.ArrayFilter);
+		}
 	}
 }
