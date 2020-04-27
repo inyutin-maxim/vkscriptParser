@@ -48,8 +48,10 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("{", VkScriptLexemeType.CurlyOpen),
 			new VkScriptStaticLexemeDefinition("}", VkScriptLexemeType.CurlyClose),
 			new VkScriptStaticLexemeDefinition(",", VkScriptLexemeType.Comma),
+			new VkScriptStaticLexemeDefinition("<=", VkScriptLexemeType.LessOrEqual),
 			new VkScriptStaticLexemeDefinition("<", VkScriptLexemeType.Less),
 			new VkScriptStaticLexemeDefinition(">", VkScriptLexemeType.Greater),
+
 		};
 
 		/// <summary>
