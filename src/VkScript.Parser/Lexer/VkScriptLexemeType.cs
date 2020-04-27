@@ -194,6 +194,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Логическое ИЛИ
 		/// </summary>
-		Or
+		Or,
+
+		/// <summary>
+		/// Логическое И
+		/// </summary>
+		And
 	}
 }
