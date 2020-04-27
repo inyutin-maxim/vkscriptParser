@@ -6,19 +6,19 @@ namespace VkScript.Parser.Exceptions
 	/// <summary>
 	/// Общее исключение, которое произошло во время разбора.
 	/// </summary>
-	public class LensCompilerException : Exception
+	public class VkScriptCompilerException : Exception
 	{
 	#region Constructors
 
-		public LensCompilerException(string msg) : base(msg)
+		public VkScriptCompilerException(string msg) : base(msg)
 		{
 		}
 
-		public LensCompilerException(string msg, Exception inner) : base(msg, inner)
+		public VkScriptCompilerException(string msg, Exception inner) : base(msg, inner)
 		{
 		}
 
-		public LensCompilerException(string msg, LocationEntity entity) : base(msg)
+		public VkScriptCompilerException(string msg, LocationEntity entity) : base(msg)
 		{
 			BindToLocation(entity);
 		}
@@ -62,7 +62,7 @@ namespace VkScript.Parser.Exceptions
 		/// <summary>
 		/// Привязать исключение к локации.
 		/// </summary>
-		public LensCompilerException BindToLocation(LocationEntity entity)
+		public VkScriptCompilerException BindToLocation(LocationEntity entity)
 		{
 			return BindToLocation(entity.StartLocation, entity.EndLocation);
 		}
@@ -70,7 +70,7 @@ namespace VkScript.Parser.Exceptions
 		/// <summary>
 		/// Привязать исключение к локации.
 		/// </summary>
-		public LensCompilerException BindToLocation(LexemeLocation start, LexemeLocation end)
+		public VkScriptCompilerException BindToLocation(LexemeLocation start, LexemeLocation end)
 		{
 			if (start.Line != 0 || start.Offset != 0)
 			{

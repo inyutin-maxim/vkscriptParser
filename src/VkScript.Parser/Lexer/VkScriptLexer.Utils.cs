@@ -114,7 +114,7 @@ namespace VkScript.Parser.Lexer
 		[DebuggerStepThrough]
 		private void Error(LocationEntity loc, string src, params object[] args)
 		{
-			throw new LensCompilerException(string.Format(src, args), loc);
+			throw new VkScriptCompilerException(string.Format(src, args), loc);
 		}
 
 		/// <summary>

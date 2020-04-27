@@ -254,7 +254,7 @@ namespace VkScript.Parser.Lexer
 
 			var end = GetPosition();
 
-			throw new LensCompilerException(LexerMessages.UnclosedString).BindToLocation(start, end);
+			throw new VkScriptCompilerException(LexerMessages.UnclosedString).BindToLocation(start, end);
 		}
 
 		/// <summary>
