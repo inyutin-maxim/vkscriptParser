@@ -57,6 +57,7 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("||", VkScriptLexemeType.Or),
 			new VkScriptStaticLexemeDefinition("&&", VkScriptLexemeType.And),
 			new VkScriptStaticLexemeDefinition("!", VkScriptLexemeType.Not),
+			new VkScriptStaticLexemeDefinition("&", VkScriptLexemeType.BitAnd),
 
 		};
 
