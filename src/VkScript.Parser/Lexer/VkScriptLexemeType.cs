@@ -164,6 +164,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Оператор меньше
 		/// </summary>
-		Less
+		Less,
+
+		/// <summary>
+		/// Оператор больше
+		/// </summary>
+		Greater
 	}
 }
