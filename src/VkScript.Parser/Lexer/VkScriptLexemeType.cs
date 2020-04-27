@@ -217,6 +217,11 @@ namespace VkScript.Parser.Lexer
 		BitOr,
 
 		/// <summary>
+		/// Побитовое НЕ
+		/// </summary>
+		BitNot,
+
+		/// <summary>
 		/// Исключающее ИЛИ
 		/// </summary>
 		ExcludingOr
