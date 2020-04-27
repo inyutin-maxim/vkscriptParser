@@ -487,5 +487,20 @@ namespace VkScript.Parser.Tests
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Equal);
 		}
+
+		[Fact]
+		public void ContainsSingleColonLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("case 1: break;");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Colon);
+		}
 	}
 }

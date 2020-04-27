@@ -44,6 +44,7 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("=", VkScriptLexemeType.Assign),
 			new VkScriptStaticLexemeDefinition("!=", VkScriptLexemeType.NotEqual),
 			new VkScriptStaticLexemeDefinition(";", VkScriptLexemeType.Semicolon),
+			new VkScriptStaticLexemeDefinition(":", VkScriptLexemeType.Colon),
 			new VkScriptStaticLexemeDefinition("(", VkScriptLexemeType.RoundOpen),
 			new VkScriptStaticLexemeDefinition(")", VkScriptLexemeType.RoundClose),
 			new VkScriptStaticLexemeDefinition("[", VkScriptLexemeType.SquareOpen),
