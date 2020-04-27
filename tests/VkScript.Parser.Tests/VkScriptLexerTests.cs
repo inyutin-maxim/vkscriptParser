@@ -1,4 +1,4 @@
-﻿using Moq.AutoMock;
+using Moq.AutoMock;
 using VkScript.Parser.Lexer;
 using Xunit;
 
@@ -411,6 +411,21 @@ namespace VkScript.Parser.Tests
 			Assert.NotNull(result);
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Identifier && x.Value == "a");
+		}
+
+		[Fact]
+		public void ContainsSingleLessLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("return 1<3;");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Less);
 		}
 	}
 }

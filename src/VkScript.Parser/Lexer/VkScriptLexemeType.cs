@@ -1,4 +1,4 @@
-﻿namespace VkScript.Parser.Lexer
+namespace VkScript.Parser.Lexer
 {
 	/// <summary>
 	/// Тип лексемы
@@ -159,6 +159,11 @@
 		/// <summary>
 		/// Запятая
 		/// </summary>
-		Comma
+		Comma,
+
+		/// <summary>
+		/// Оператор меньше
+		/// </summary>
+		Less
 	}
 }
