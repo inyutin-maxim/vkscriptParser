@@ -117,6 +117,11 @@ namespace VkScript.Parser.Lexer
 		Assign,
 
 		/// <summary>
+		/// Двоеточие
+		/// </summary>
+		Colon,
+
+		/// <summary>
 		/// Точка с запятой
 		/// </summary>
 		Semicolon,
