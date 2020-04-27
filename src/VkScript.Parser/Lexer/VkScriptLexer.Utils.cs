@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using JetBrains.Annotations;
 using VkScript.Parser.Exceptions;
 using VkScript.Parser.SyntaxTree;
@@ -48,6 +48,7 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("{", VkScriptLexemeType.CurlyOpen),
 			new VkScriptStaticLexemeDefinition("}", VkScriptLexemeType.CurlyClose),
 			new VkScriptStaticLexemeDefinition(",", VkScriptLexemeType.Comma),
+			new VkScriptStaticLexemeDefinition("<", VkScriptLexemeType.Less),
 		};
 
 		/// <summary>
