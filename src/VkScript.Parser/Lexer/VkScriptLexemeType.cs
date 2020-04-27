@@ -234,6 +234,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Правый сдвиг
 		/// </summary>
-		RightShift
+		RightShift,
+
+		/// <summary>
+		/// Правый сдвиг с заполнением нулями
+		/// </summary>
+		RightFillingShift
 	}
 }
