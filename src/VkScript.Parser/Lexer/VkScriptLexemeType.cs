@@ -214,6 +214,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Побитовое ИЛИ
 		/// </summary>
-		BitOr
+		BitOr,
+
+		/// <summary>
+		/// Исключающее ИЛИ
+		/// </summary>
+		ExcludingOr
 	}
 }
