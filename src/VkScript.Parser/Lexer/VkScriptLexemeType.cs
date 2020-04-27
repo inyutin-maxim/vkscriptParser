@@ -224,6 +224,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Исключающее ИЛИ
 		/// </summary>
-		ExcludingOr
+		ExcludingOr,
+
+		/// <summary>
+		/// Левый сдвиг
+		/// </summary>
+		LeftShift
 	}
 }
