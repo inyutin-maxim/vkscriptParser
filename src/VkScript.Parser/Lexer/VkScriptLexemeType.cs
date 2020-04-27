@@ -19,6 +19,11 @@ namespace VkScript.Parser.Lexer
 		NewLine,
 
 		/// <summary>
+		/// Оператор удаления
+		/// </summary>
+		Delete,
+
+		/// <summary>
 		/// Оператор возвращения значения
 		/// </summary>
 		Return,

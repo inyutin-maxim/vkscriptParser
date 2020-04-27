@@ -23,7 +23,8 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("false", VkScriptLexemeType.False),
 			new VkScriptStaticLexemeDefinition("var", VkScriptLexemeType.Var),
 			new VkScriptStaticLexemeDefinition("null", VkScriptLexemeType.Null),
-			new VkScriptStaticLexemeDefinition("return", VkScriptLexemeType.Return)
+			new VkScriptStaticLexemeDefinition("return", VkScriptLexemeType.Return),
+			new VkScriptStaticLexemeDefinition("delete", VkScriptLexemeType.Delete),
 		};
 
 		/// <summary>
