@@ -34,6 +34,9 @@ namespace VkScript.Parser.Lexer
 		/// </remarks>
 		private static readonly VkScriptStaticLexemeDefinition[] Operators =
 		{
+			new VkScriptStaticLexemeDefinition("==", VkScriptLexemeType.Equal),
+			new VkScriptStaticLexemeDefinition("<=", VkScriptLexemeType.LessOrEqual),
+			new VkScriptStaticLexemeDefinition(">=", VkScriptLexemeType.GreaterOrEqual),
 			new VkScriptStaticLexemeDefinition("+", VkScriptLexemeType.Plus),
 			new VkScriptStaticLexemeDefinition("-", VkScriptLexemeType.Minus),
 			new VkScriptStaticLexemeDefinition("*", VkScriptLexemeType.Multiply),
@@ -48,8 +51,6 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("{", VkScriptLexemeType.CurlyOpen),
 			new VkScriptStaticLexemeDefinition("}", VkScriptLexemeType.CurlyClose),
 			new VkScriptStaticLexemeDefinition(",", VkScriptLexemeType.Comma),
-			new VkScriptStaticLexemeDefinition("<=", VkScriptLexemeType.LessOrEqual),
-			new VkScriptStaticLexemeDefinition(">=", VkScriptLexemeType.GreaterOrEqual),
 			new VkScriptStaticLexemeDefinition("<", VkScriptLexemeType.Less),
 			new VkScriptStaticLexemeDefinition(">", VkScriptLexemeType.Greater),
 
