@@ -457,5 +457,20 @@ namespace VkScript.Parser.Tests
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.LessOrEqual);
 		}
+
+		[Fact]
+		public void ContainsSingleGreaterOrEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("if (a>=b)");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.GreaterOrEqual);
+		}
 	}
 }
