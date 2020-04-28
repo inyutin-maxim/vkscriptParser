@@ -920,5 +920,22 @@ namespace VkScript.Parser.Tests
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.BitAnd);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.And);
 		}
+
+		[Fact]
+		public void ContainsSingleOrAndBitOrLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("| ||");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Or);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.BitOr);
+		}
 	}
 }
