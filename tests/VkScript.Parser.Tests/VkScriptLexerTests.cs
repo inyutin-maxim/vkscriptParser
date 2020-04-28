@@ -699,5 +699,56 @@ namespace VkScript.Parser.Tests
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Not);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.NotEqual);
 		}
+
+		[Fact]
+		public void ContainsSingleLessAndLessOrEqualEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("< <=");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Less);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.LessOrEqual);
+		}
+
+		[Fact]
+		public void ContainsSingleLessAndLeftShiftLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("< <<");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Less);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.LeftShift);
+		}
+
+		[Fact]
+		public void ContainsSingleLeftShiftAndLessOrEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("<< <=");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.LeftShift);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.LessOrEqual);
+		}
 	}
 }
