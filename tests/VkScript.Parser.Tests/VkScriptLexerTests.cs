@@ -837,7 +837,7 @@ namespace VkScript.Parser.Tests
 		}
 
 		[Fact]
-		public void ContainsSingleAssingAndEqualLexeme()
+		public void ContainsSingleAssignAndEqualLexeme()
 		{
 			// Arrange
 			var service = _mocker.CreateInstance<VkScriptLexer>();
@@ -854,7 +854,7 @@ namespace VkScript.Parser.Tests
 		}
 
 		[Fact]
-		public void ContainsSingleAssingAndLessOrEqualLexeme()
+		public void ContainsSingleAssignAndLessOrEqualLexeme()
 		{
 			// Arrange
 			var service = _mocker.CreateInstance<VkScriptLexer>();
@@ -871,7 +871,7 @@ namespace VkScript.Parser.Tests
 		}
 
 		[Fact]
-		public void ContainsSingleAssingAndGreaterOrEqualLexeme()
+		public void ContainsSingleAssignAndGreaterOrEqualLexeme()
 		{
 			// Arrange
 			var service = _mocker.CreateInstance<VkScriptLexer>();
@@ -888,7 +888,7 @@ namespace VkScript.Parser.Tests
 		}
 
 		[Fact]
-		public void ContainsSingleAssingAndNotEqualLexeme()
+		public void ContainsSingleAssignAndNotEqualLexeme()
 		{
 			// Arrange
 			var service = _mocker.CreateInstance<VkScriptLexer>();
