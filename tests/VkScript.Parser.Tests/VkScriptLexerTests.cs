@@ -682,5 +682,22 @@ namespace VkScript.Parser.Tests
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.ArrayFilter);
 		}
+
+		[Fact]
+		public void ContainsSingleNotAndNotEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("! !=");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Not);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.NotEqual);
+		}
 	}
 }
