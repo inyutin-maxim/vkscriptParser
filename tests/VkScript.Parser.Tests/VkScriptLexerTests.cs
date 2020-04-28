@@ -750,5 +750,90 @@ namespace VkScript.Parser.Tests
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.LeftShift);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.LessOrEqual);
 		}
+
+		[Fact]
+		public void ContainsSingleGreaterAndRightShiftLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("> >>");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Greater);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RightShift);
+		}
+
+		[Fact]
+		public void ContainsSingleRightAndRightFillingShiftLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse(">> >>>");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RightShift);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RightFillingShift);
+		}
+
+		[Fact]
+		public void ContainsSingleGreaterAndGreaterOrEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("> >=");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Greater);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.GreaterOrEqual);
+		}
+
+		[Fact]
+		public void ContainsSingleRightShiftAndGreaterOrEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse(">> >=");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RightShift);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.GreaterOrEqual);
+		}
+
+		[Fact]
+		public void ContainsSingleRightFillingShiftAndGreaterOrEqualLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse(">>> >=");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.RightFillingShift);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.GreaterOrEqual);
+		}
 	}
 }
