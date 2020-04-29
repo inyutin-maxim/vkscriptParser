@@ -86,7 +86,7 @@ namespace VkScript.Parser.Lexer
 		/// Возвращает текущий символ
 		/// </summary>
 		[DebuggerStepThrough]
-		private char CurrChar()
+		private char GetCurrentChar()
 		{
 			return _source[_position];
 		}
@@ -95,7 +95,7 @@ namespace VkScript.Parser.Lexer
 		/// Возвращает следующий символ, если он есть.
 		/// </summary>
 		[DebuggerStepThrough]
-		private char? NextChar(int offset = 1)
+		private char? GetNextChar(int offset = 1)
 		{
 			var pos = _position + offset;
 
@@ -143,7 +143,7 @@ namespace VkScript.Parser.Lexer
 		[DebuggerStepThrough]
 		private bool IsComment()
 		{
-			return CurrChar() == '/' && NextChar() == '/';
+			return GetCurrentChar() == '/' && GetNextChar() == '/';
 		}
 
 		/// <summary>

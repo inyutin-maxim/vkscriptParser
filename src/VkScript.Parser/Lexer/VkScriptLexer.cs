@@ -34,7 +34,7 @@ namespace VkScript.Parser.Lexer
 					continue;
 				}
 
-				if (CurrChar() == '"' || CurrChar() == '\'')
+				if (GetCurrentChar() == '"' || GetCurrentChar() == '\'')
 				{
 					ProcessStringLiteral();
 
@@ -44,11 +44,11 @@ namespace VkScript.Parser.Lexer
 					}
 				} else if (IsComment())
 				{
-					while (InBounds() && CurrChar() != '\r' && CurrChar() != '\n')
+					while (InBounds() && GetCurrentChar() != '\r' && GetCurrentChar() != '\n')
 					{
 						_position++;
 					}
-				} else if (CurrChar() == '\t')
+				} else if (GetCurrentChar() == '\t')
 				{
 					Error(LexerMessages.TabChar);
 				} else
@@ -66,7 +66,7 @@ namespace VkScript.Parser.Lexer
 				SkipSpaces();
 			}
 
-			if (Lexemes[Lexemes.Count - 1].Type != VkScriptLexemeType.NewLine)
+			if (Lexemes[^1].Type != VkScriptLexemeType.NewLine)
 			{
 				AddLexeme(VkScriptLexemeType.NewLine, GetPosition());
 			}
@@ -77,7 +77,7 @@ namespace VkScript.Parser.Lexer
 				_indentLookup.Pop();
 			}
 
-			if (Lexemes[Lexemes.Count - 1].Type == VkScriptLexemeType.NewLine)
+			if (Lexemes[^1].Type == VkScriptLexemeType.NewLine)
 			{
 				Lexemes.RemoveAt(Lexemes.Count - 1);
 			}
@@ -131,14 +131,14 @@ namespace VkScript.Parser.Lexer
 		{
 			var currentIndent = 0;
 
-			while (CurrChar() == ' ')
+			while (GetCurrentChar() == ' ')
 			{
 				Skip();
 				currentIndent++;
 			}
 
 			// empty line?
-			if (CurrChar() == '\n' || CurrChar() == '\r')
+			if (GetCurrentChar() == '\n' || GetCurrentChar() == '\r')
 			{
 				return;
 			}
@@ -199,15 +199,15 @@ namespace VkScript.Parser.Lexer
 
 			Skip();
 
-			var startPos = GetPosition();
+			var startPosition = GetPosition();
 			var sb = new StringBuilder();
 			var isEscaped = false;
 
 			while (InBounds())
 			{
-				var ch = CurrChar();
+				var currentChar = GetCurrentChar();
 
-				if (!isEscaped && ch == '\\')
+				if (!isEscaped && currentChar == '\\')
 				{
 					isEscaped = true;
 
@@ -216,7 +216,7 @@ namespace VkScript.Parser.Lexer
 
 				if (isEscaped)
 				{
-					var nextChar = NextChar();
+					var nextChar = GetNextChar();
 
 					if (nextChar.HasValue)
 					{
@@ -229,16 +229,16 @@ namespace VkScript.Parser.Lexer
 					continue;
 				}
 
-				switch (ch)
+				switch (currentChar)
 				{
 					case '"':
 						Skip();
-						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPos, GetPosition(), sb.ToString()));
+						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPosition, GetPosition(), sb.ToString()));
 
 						return;
 					case '\'':
 						Skip();
-						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPos, GetPosition(), sb.ToString()));
+						Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.String, startPosition, GetPosition(), sb.ToString()));
 
 						return;
 					case '\n':
@@ -248,7 +248,7 @@ namespace VkScript.Parser.Lexer
 						break;
 				}
 
-				sb.Append(ch);
+				sb.Append(currentChar);
 				Skip();
 			}
 
@@ -271,31 +271,31 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		private VkScriptLexeme ProcessLexemeList(IEnumerable<VkScriptStaticLexemeDefinition> lexemes, Func<char, bool> nextChecker = null)
 		{
-			foreach (var curr in lexemes)
+			foreach (var currentLexeme in lexemes)
 			{
-				var rep = curr.Representation;
-				var len = rep.Length;
+				var representation = currentLexeme.Representation;
+				var length = representation.Length;
 
-				if (_position + len > _source.Length || _source.Substring(_position, len) != rep)
+				if (_position + length > _source.Length || _source.Substring(_position, length) != representation)
 				{
 					continue;
 				}
 
-				if (_position + len < _source.Length)
+				if (_position + length < _source.Length)
 				{
-					var nextCh = _source[_position + len];
+					var nextChar = _source[_position + length];
 
-					if (nextChecker != null && !nextChecker(nextCh))
+					if (nextChecker != null && !nextChecker(nextChar))
 					{
 						continue;
 					}
 				}
 
 				var start = GetPosition();
-				Skip(len);
+				Skip(length);
 				var end = GetPosition();
 
-				return new VkScriptLexeme(curr.Type, start, end);
+				return new VkScriptLexeme(currentLexeme.Type, start, end);
 			}
 
 			return null;
@@ -306,9 +306,9 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		private VkScriptLexeme ProcessRegexLexeme()
 		{
-			foreach (var curr in RegexLexemes)
+			foreach (var currentLexeme in RegexLexemes)
 			{
-				var match = curr.Regex.Match(_source, _position);
+				var match = currentLexeme.Regex.Match(_source, _position);
 
 				if (!match.Success)
 				{
@@ -319,7 +319,7 @@ namespace VkScript.Parser.Lexer
 				Skip(match.Length);
 				var end = GetPosition();
 
-				return new VkScriptLexeme(curr.Type, start, end, match.Value);
+				return new VkScriptLexeme(currentLexeme.Type, start, end, match.Value);
 			}
 
 			return null;
@@ -335,14 +335,14 @@ namespace VkScript.Parser.Lexer
 				return false;
 			}
 
-			if (CurrChar() == '\r')
+			if (GetCurrentChar() == '\r')
 			{
 				Skip();
 
 				return false;
 			}
 
-			if (CurrChar() != '\n')
+			if (GetCurrentChar() != '\n')
 			{
 				return false;
 			}
@@ -360,9 +360,9 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Добавляет новую лексему в список.
 		/// </summary>
-		private void AddLexeme(VkScriptLexemeType type, LexemeLocation loc)
+		private void AddLexeme(VkScriptLexemeType type, LexemeLocation location)
 		{
-			Lexemes.Add(new VkScriptLexeme(type, loc, default));
+			Lexemes.Add(new VkScriptLexeme(type, location, default));
 		}
 
 		/// <summary>
@@ -376,19 +376,19 @@ namespace VkScript.Parser.Lexer
 			var isStart = true;
 			VkScriptLexeme newLine = null;
 
-			foreach (var curr in Lexemes)
+			foreach (var currentLexeme in Lexemes)
 			{
-				if (curr.Type == VkScriptLexemeType.NewLine)
+				if (currentLexeme.Type == VkScriptLexemeType.NewLine)
 				{
 					if (!isStart)
 					{
-						newLine = curr;
+						newLine = currentLexeme;
 					}
 				} else
 				{
 					if (newLine != null)
 					{
-						if (!curr.Type.IsAnyOf(eaters))
+						if (!currentLexeme.Type.IsAnyOf(eaters))
 						{
 							result.Add(newLine);
 						}
@@ -397,7 +397,7 @@ namespace VkScript.Parser.Lexer
 					}
 
 					isStart = false;
-					result.Add(curr);
+					result.Add(currentLexeme);
 				}
 			}
 
