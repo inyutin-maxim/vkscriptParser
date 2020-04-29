@@ -34,7 +34,32 @@ namespace VkScript.Parser.Lexer
 					continue;
 				}
 
-				if (GetCurrentChar() == '"' || GetCurrentChar() == '\'')
+				if (IsComment())
+				{
+					var startCommentOffset = new LexemeLocation
+					{
+						Line = _line,
+						Offset = _offset
+					};
+
+					while (InBounds() && !IsEndOfLine())
+					{
+						Skip();
+					}
+
+					var commentText = _source.Substring(startCommentOffset.Offset, _position - startCommentOffset.Offset).Trim();
+
+					Lexemes.Add(new VkScriptLexeme(VkScriptLexemeType.Comment,
+						startCommentOffset,
+						GetPosition(),
+						commentText));
+
+					ProcessNewLine();
+
+					continue;
+				}
+
+				if (IsStringBegin())
 				{
 					ProcessStringLiteral();
 
@@ -42,15 +67,6 @@ namespace VkScript.Parser.Lexer
 					{
 						break;
 					}
-				} else if (IsComment())
-				{
-					while (InBounds() && GetCurrentChar() != '\r' && GetCurrentChar() != '\n')
-					{
-						_position++;
-					}
-				} else if (GetCurrentChar() == '\t')
-				{
-					Error(LexerMessages.TabChar);
 				} else
 				{
 					var lex = ProcessStaticLexeme() ?? ProcessRegexLexeme();
@@ -66,26 +82,19 @@ namespace VkScript.Parser.Lexer
 				SkipSpaces();
 			}
 
-			if (Lexemes[^1].Type != VkScriptLexemeType.NewLine)
-			{
-				AddLexeme(VkScriptLexemeType.NewLine, GetPosition());
-			}
-
-			while (_indentLookup.Count > 1)
-			{
-				AddLexeme(VkScriptLexemeType.Dedent, GetPosition());
-				_indentLookup.Pop();
-			}
-
-			if (Lexemes[^1].Type == VkScriptLexemeType.NewLine)
-			{
-				Lexemes.RemoveAt(Lexemes.Count - 1);
-			}
-
 			AddLexeme(VkScriptLexemeType.Eof, GetPosition());
 			FilterNewlines();
 
 			return Lexemes;
+		}
+
+		/// <summary>
+		/// Проверка начала строкового литерала
+		/// </summary>
+		/// <returns></returns>
+		private bool IsStringBegin()
+		{
+			return GetCurrentChar() == '"' || GetCurrentChar() == '\'';
 		}
 
 	#region Fields
@@ -115,11 +124,6 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		private bool _newLine = true;
 
-		/// <summary>
-		/// Поиск уровней отступов.
-		/// </summary>
-		private readonly Stack<int> _indentLookup = new Stack<int>();
-
 	#endregion
 
 	#region Private methods
@@ -129,53 +133,9 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		private void ProcessIndent()
 		{
-			var currentIndent = 0;
-
-			while (GetCurrentChar() == ' ')
+			while (GetCurrentChar() == ' ' || GetCurrentChar() == '\t')
 			{
 				Skip();
-				currentIndent++;
-			}
-
-			// empty line?
-			if (GetCurrentChar() == '\n' || GetCurrentChar() == '\r')
-			{
-				return;
-			}
-
-			// first line?
-			if (_indentLookup.Count == 0)
-			{
-				_indentLookup.Push(currentIndent);
-			}
-
-			// indent increased
-			else if (currentIndent > _indentLookup.Peek())
-			{
-				_indentLookup.Push(currentIndent);
-				AddLexeme(VkScriptLexemeType.Indent, GetPosition());
-			}
-
-			// indent decreased
-			else if (currentIndent < _indentLookup.Peek())
-			{
-				while (true)
-				{
-					if (_indentLookup.Count > 0)
-					{
-						_indentLookup.Pop();
-					} else
-					{
-						Error(LexerMessages.InconsistentIdentation);
-					}
-
-					AddLexeme(VkScriptLexemeType.Dedent, GetPosition());
-
-					if (currentIndent == _indentLookup.Peek())
-					{
-						break;
-					}
-				}
 			}
 		}
 
@@ -335,26 +295,28 @@ namespace VkScript.Parser.Lexer
 				return false;
 			}
 
-			if (GetCurrentChar() == '\r')
-			{
-				Skip();
-
-				return false;
-			}
-
-			if (GetCurrentChar() != '\n')
+			if (!IsEndOfLine())
 			{
 				return false;
 			}
 
+			Skip(2);
 			AddLexeme(VkScriptLexemeType.NewLine, GetPosition());
 
-			Skip();
 			_offset = 1;
 			_line++;
 			_newLine = true;
 
 			return true;
+		}
+
+		/// <summary>
+		/// Проверка на окончание строки
+		/// </summary>
+		/// <returns></returns>
+		private bool IsEndOfLine()
+		{
+			return GetCurrentChar() == '\r' && GetNextChar() == '\n';
 		}
 
 		/// <summary>

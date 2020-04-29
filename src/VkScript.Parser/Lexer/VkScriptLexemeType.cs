@@ -249,6 +249,11 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Фильтр массива по параметру
 		/// </summary>
-		ArrayFilter
+		ArrayFilter,
+
+		/// <summary>
+		/// Комментарий
+		/// </summary>
+		Comment
 	}
 }

@@ -937,5 +937,59 @@ namespace VkScript.Parser.Tests
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Or);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.BitOr);
 		}
+
+		[Fact]
+		public void ContainsMoreThanOneNewLineInARow()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			const string code = "// комментарий из нескольких слов\r\n\r\n\r\nreturn true;";
+
+			// Act
+			var result = service.Parse(code);
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Comment && x.Value == "комментарий из нескольких слов");
+		}
+
+		[Fact]
+		public void ContainsIndentInLine()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			const string code = "\t// комментарий из нескольких слов\r\n\r\n\r\nreturn true;";
+
+			// Act
+			var result = service.Parse(code);
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Comment && x.Value == "комментарий из нескольких слов");
+		}
+
+		[Fact]
+		public void ContainsCommentLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			const string code = "// комментарий из нескольких слов";
+
+			// Act
+			var result = service.Parse(code);
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.Comment && x.Value == "комментарий из нескольких слов");
+		}
 	}
 }

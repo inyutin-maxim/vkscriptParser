@@ -97,14 +97,14 @@ namespace VkScript.Parser.Lexer
 		[DebuggerStepThrough]
 		private char? GetNextChar(int offset = 1)
 		{
-			var pos = _position + offset;
+			var position = _position + offset;
 
-			if (pos < 0 || pos >= _source.Length)
+			if (position < 0 || position >= _source.Length)
 			{
 				return null;
 			}
 
-			return _source[pos];
+			return _source[position];
 		}
 
 		/// <summary>
@@ -112,9 +112,9 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		[ContractAnnotation("=> halt")]
 		[DebuggerStepThrough]
-		private void Error(LocationEntity loc, string src, params object[] args)
+		private void Error(LocationEntity location, string source, params object[] args)
 		{
-			throw new VkScriptCompilerException(string.Format(src, args), loc);
+			throw new VkScriptCompilerException(string.Format(source, args), location);
 		}
 
 		/// <summary>
@@ -122,10 +122,18 @@ namespace VkScript.Parser.Lexer
 		/// </summary>
 		[ContractAnnotation("=> halt")]
 		[DebuggerStepThrough]
-		private void Error(string src, params object[] args)
+		private void Error(string source, params object[] args)
 		{
-			var loc = new LocationEntity { StartLocation = GetPosition() };
-			Error(loc, src, args);
+			var location = new LocationEntity
+			{
+				StartLocation = GetPosition(), EndLocation = new LexemeLocation
+				{
+					Line = _line,
+					Offset = _position
+				}
+			};
+
+			Error(location, source, args);
 		}
 
 		/// <summary>
@@ -143,7 +151,15 @@ namespace VkScript.Parser.Lexer
 		[DebuggerStepThrough]
 		private bool IsComment()
 		{
-			return GetCurrentChar() == '/' && GetNextChar() == '/';
+			if (GetCurrentChar() != '/' || GetNextChar() != '/')
+			{
+				return false;
+			}
+
+			Skip(2);
+
+			return true;
+
 		}
 
 		/// <summary>
