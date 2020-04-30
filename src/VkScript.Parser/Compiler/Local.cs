@@ -5,14 +5,14 @@ using System.Reflection.Emit;
 namespace VkScript.Parser.Compiler
 {
 	/// <summary>
-	/// A class representing info about a local variable.
+	/// Класс, представляющий информацию о локальной переменной.
 	/// </summary>
 	public class Local
 	{
 	#region Methods
 
 		/// <summary>
-		/// Create a copy of the name information and bind it to the distance.
+		/// Создайте копию информации об имени и привяжите ее к расстоянию.
 		/// </summary>
 		public Local GetClosuredCopy(int distance)
 		{
@@ -52,10 +52,7 @@ namespace VkScript.Parser.Compiler
 				entities.Add($"arg({ArgumentId})");
 			}
 
-			return string.Format("{0}:{1} ({2})",
-				Name,
-				Type.Name,
-				string.Join(", ", entities));
+			return $"{Name}:{Type.Name} ({string.Join(", ", entities)})";
 		}
 
 	#endregion
@@ -63,7 +60,7 @@ namespace VkScript.Parser.Compiler
 	#region Constructors
 
 		/// <summary>
-		/// Creates a new instance of the Local variable.
+		/// Создает новый экземпляр локальной переменной.
 		/// </summary>
 		public Local(string name, Type type, bool isConst = false, bool isRefArg = false)
 		{
@@ -74,7 +71,7 @@ namespace VkScript.Parser.Compiler
 		}
 
 		/// <summary>
-		/// Copy constructor for closured versions of the local.
+		/// Копировать конструктор для закрытых версий локальных.
 		/// </summary>
 		private Local(Local other, int dist = 0)
 		{
@@ -100,58 +97,58 @@ namespace VkScript.Parser.Compiler
 	#region Fields
 
 		/// <summary>
-		/// Variable name.
+		/// Имя переменной.
 		/// </summary>
 		public readonly string Name;
 
 		/// <summary>
-		/// Variable type.
+		/// Тип переменной.
 		/// </summary>
 		public readonly Type Type;
 
 		/// <summary>
-		/// Is the name a constant or a variable?
+		/// Флаг показывающий что переменная только для чтения
 		/// </summary>
 		public readonly bool IsImmutable;
 
 		/// <summary>
-		/// Does the variable represent a function argument that is passed by ref?
+		/// Представляет ли переменная аргумент функции, который передается с помощью ref?
 		/// </summary>
 		public readonly bool IsRefArgument;
 
 		/// <summary>
-		/// The ID of the argument if this name represents one.
+		/// Идентификатор аргумента, если это имя представляет единицу.
 		/// </summary>
 		public int? ArgumentId;
 
 		/// <summary>
-		/// Is the name referenced in nested scopes?
+		/// На имя ссылаются во вложенных областях?
 		/// </summary>
 		public bool IsClosured;
 
 		/// <summary>
-		/// The distance between the current scope and the scope that owns this variable.
+		/// Расстояние между текущей областью и областью, которой принадлежит эта переменная.
 		/// </summary>
 		public int? ClosureDistance;
 
 		/// <summary>
-		/// The name of the field in closured class.
+		/// Название поля в закрытом классе.
 		/// </summary>
 		public string ClosureFieldName;
 
 		/// <summary>
-		/// The local builder identifier.
+		/// Идентификатор локального застройщика.
 		/// </summary>
 		public LocalBuilder LocalBuilder;
 
 		/// <summary>
-		/// Checks if the current local name represents a constant.
-		/// Must also be immutable!
+		/// Проверяет, представляет ли текущее локальное имя константу.
+		/// Также должен быть неизменным!
 		/// </summary>
 		public bool IsConstant;
 
 		/// <summary>
-		/// The compile-time constant value for current local name.
+		/// Значение константы времени компиляции для текущего локального имени.
 		/// </summary>
 		public dynamic ConstantValue;
 

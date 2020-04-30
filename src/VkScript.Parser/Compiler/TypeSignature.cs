@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JetBrains.Annotations;
 using VkScript.Parser.SyntaxTree;
 
 namespace VkScript.Parser.Compiler
 {
 	/// <summary>
-	/// A cache-friendly version of type signature.
+	/// Кэш-дружественная версия подписи типа.
 	/// </summary>
 	public class TypeSignature : LocationEntity
 	{
 	#region Static fields
 
 		/// <summary>
-		/// List of available postfixes.
+		/// Список доступных исправлений.
 		/// </summary>
 		private static readonly string[] Postfixes = { "[]", "?", "~" };
 
@@ -48,17 +49,17 @@ namespace VkScript.Parser.Compiler
 	#region Fields
 
 		/// <summary>
-		/// The name of the type. Like 'int', or 'Dictionary'.
+		/// Имя типа. Например, "int" или "Dictionary".
 		/// </summary>
 		public readonly string Name;
 
 		/// <summary>
-		/// List of generic argument type signatures (if any).
+		/// Список сигнатур типа универсального аргумента (при наличии).
 		/// </summary>
 		public readonly TypeSignature[] Arguments;
 
 		/// <summary>
-		/// Special postfix character:
+		/// Специальный постфиксный символ:
 		/// [] = array,
 		/// ? = Nullable
 		/// ~ = IEnumerable
@@ -66,7 +67,7 @@ namespace VkScript.Parser.Compiler
 		public readonly string Postfix;
 
 		/// <summary>
-		/// Complete signature with all arguments, postfixes, etc.
+		/// Полная подпись со всеми аргументами, постфактумами и т. д.
 		/// </summary>
 		public readonly string FullSignature;
 
@@ -75,7 +76,7 @@ namespace VkScript.Parser.Compiler
 	#region Static constructors
 
 		/// <summary>
-		/// Initializes a type signature with it's string representation.
+		/// Инициализирует сигнатуру типа со строковым представлением.
 		/// </summary>
 		public static implicit operator TypeSignature(string type)
 		{
@@ -83,7 +84,7 @@ namespace VkScript.Parser.Compiler
 		}
 
 		/// <summary>
-		/// Parses the type signature.
+		/// Анализирует сигнатуру типа.
 		/// </summary>
 		public static TypeSignature Parse(string signature)
 		{
@@ -119,7 +120,7 @@ namespace VkScript.Parser.Compiler
 	#region Helpers
 
 		/// <summary>
-		/// Builds the full string representation of the signature tree.
+		/// Строит полное строковое представление дерева сигнатур.
 		/// </summary>
 		private string GetSignature(string name, TypeSignature[] args)
 		{
@@ -156,7 +157,7 @@ namespace VkScript.Parser.Compiler
 		}
 
 		/// <summary>
-		/// Parses out the list of generic type arguments delimited by commas.
+		/// Анализирует список аргументов универсального типа, разделенных запятыми.
 		/// </summary>
 		private static IEnumerable<TypeSignature> ParseTypeArgs(string args)
 		{
@@ -191,6 +192,7 @@ namespace VkScript.Parser.Compiler
 
 	#region Equality
 
+		[UsedImplicitly]
 		protected bool Equals(TypeSignature other)
 		{
 			var basic = string.Equals(Name, other.Name)

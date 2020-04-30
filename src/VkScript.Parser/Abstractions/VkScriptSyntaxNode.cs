@@ -22,7 +22,7 @@ namespace VkScript.Parser.Abstractions
 		/// <summary>
 		/// Проверяет, является ли текущий узел константой.
 		/// </summary>
-		public virtual bool IsConstant => false;
+		protected virtual bool IsConstant => false;
 
 		/// <summary>
 		/// Возвращает постоянное значение, соответствующее текущему узлу.
@@ -53,6 +53,7 @@ namespace VkScript.Parser.Abstractions
 		/// <param name="args"> Необязательные аргументы ошибки. </param>
 		[ContractAnnotation("=> halt")]
 		[DebuggerStepThrough]
+		[UsedImplicitly]
 		protected void Error(LocationEntity entity, string message, params object[] args)
 		{
 			var msg = string.Format(message, args);
