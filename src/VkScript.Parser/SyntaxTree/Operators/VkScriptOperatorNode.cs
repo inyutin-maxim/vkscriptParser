@@ -8,7 +8,7 @@ namespace VkScript.Parser.SyntaxTree.Operators
 	/// <summary>
 	/// Базовая нода для всех операторов
 	/// </summary>
-	internal abstract class VkScriptOperatorNode : VkScriptSyntaxNode
+	public abstract class VkScriptOperatorNode : VkScriptSyntaxNode
 	{
 	#region Operator basics
 
