@@ -15,7 +15,7 @@ namespace VkScript.Parser.SyntaxTree.Operators
 		protected abstract string OperatorRepresentation { get; }
 
 		/// <summary>
-		/// The name of the method that C# compiler uses for method overloading.
+		/// Имя метода, используемого компилятором C # для перегрузки метода.
 		/// </summary>
 		protected virtual string OverloadedMethodName => null;
 
