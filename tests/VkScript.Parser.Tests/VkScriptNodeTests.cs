@@ -23,5 +23,13 @@ namespace VkScript.Parser.Tests
 
 			Assert.NotNull(node);
 		}
+
+		[Fact]
+		public void MinusOperatorNode()
+		{
+			var node = _mocker.CreateInstance<VkScriptMinusOperatorNode>();
+
+			Assert.NotNull(node);
+		}
 	}
 }
