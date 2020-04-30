@@ -15,5 +15,13 @@ namespace VkScript.Parser.Tests
 
 			Assert.NotNull(node);
 		}
+
+		[Fact]
+		public void DivideOperatorNode()
+		{
+			var node = _mocker.CreateInstance<VkScriptDivideOperatorNode>();
+
+			Assert.NotNull(node);
+		}
 	}
 }
