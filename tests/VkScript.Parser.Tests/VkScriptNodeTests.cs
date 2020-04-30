@@ -31,7 +31,6 @@ namespace VkScript.Parser.Tests
 
 			Assert.NotNull(node);
 		}
-
 		[Fact]
 		public void PlusOperatorNode()
 		{
