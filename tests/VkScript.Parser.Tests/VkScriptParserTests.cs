@@ -1,4 +1,6 @@
+using System.Linq;
 using Moq.AutoMock;
+using VkScript.Parser.Lexer;
 using Xunit;
 
 namespace VkScript.Parser.Tests
@@ -10,8 +12,8 @@ namespace VkScript.Parser.Tests
 		[Fact]
 		public void ContainsPlusOperator()
 		{
-			var parser = _mocker.CreateInstance<VkScriptParser>();
-			var script = parser.Parse("1+1");
+			var parser = _mocker.CreateInstance<Parser.VkScriptParser>();
+			var script = parser.Parse(Enumerable.Empty<VkScriptLexeme>());
 			Assert.NotNull(script);
 		}
 	}
