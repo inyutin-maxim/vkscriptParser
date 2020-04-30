@@ -709,7 +709,7 @@ namespace VkScript.Parser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LE3150: Делегает ожидает {0} аргументов, но анонимная функция принимает {1}!.
+        ///   Looks up a localized string similar to LE3150: Делегат ожидает {0} аргументов, но анонимная функция принимает {1}!.
         /// </summary>
         internal static string LambdaArgumentsCountMismatch {
             get {
@@ -1168,7 +1168,7 @@ namespace VkScript.Parser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LE3097: Растройки безопасного режима не позволяют использовать тип &apos;{0}&apos;!.
+        ///   Looks up a localized string similar to LE3097: Настройки безопасного режима не позволяют использовать тип &apos;{0}&apos;!.
         /// </summary>
         internal static string SafeModeIllegalType {
             get {
