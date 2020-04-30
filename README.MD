@@ -1,39 +1,91 @@
-Для публикации проекта выполните:
-```
-dotnet publish -c Release -o ./bin/Docker -r linux-x64
-```
+#Лексер, парсер, компилятор скриптового языка VkScript
 
-Для сборки dockerfile выполнтие в терминале:
+**VKScript** - формате, похожем на **JavaSсript** или **ActionScript** (предполагается совместимость с **ECMAScript**). Алгоритм должен завершаться командой **return %выражение%**. Операторы должны быть разделены точкой с запятой.
 
-```
-docker build --build-arg source=. -t reo-identity-server-mvc .
-```
+> Внутри **code** может содержаться не более 25 обращений к методам API.
 
-для запуска контейнера
+Пример значения параметра code
 
-```
-docker run -p 5000:80 --name reo-identity-server-mvc -t -i reo-identity-server-mvc:latest 
-```
+> <pre>
+> // присваивает переменной a результат поиска по фотографиям с данными параметрами
+> var a = API.photos.search({"q":"Nature","count":3});
+>
+> // присваивает переменной b список владельцев найденных фотографий
+> var b = a.items@.owner_id;
+>
+> // присваивает переменной с данные о страницах владельцев из списка b
+> var c = API.users.get({"user_ids":b});
+>
+> // возвращает список фамилий из данных о владельцах
+> return c@.last_name;
+>
+> // пример цикла
+> var a = 1;
+> var b = 10;
+> while (b != 0) {
+>     b = b - 1;
+>     a = a + 1;
+> };
+> return a;
+> </pre>
 
-Для разработки можно использовать postgres из docker
-```
-docker run --name dev-postgres -e POSTGRES_PASSWORD=QAZ1qaz -d postgres
-``` 
+То же самое можно более коротко записать так:
 
-# Миграции
-Для выполнения накатывания новой миграции используйте следующую команду
-### IdentityContext
-```bash
- dotnet ef migrations add -o Data/Migrations/IdentityServer/IdentityDb -p Reo.IdentityServer -c IdentityContext Initial
-```
+> <pre>return API.users.get({"user_ids": API.photos.search({"q":"Beatles", "count":3}).items@.owner_id})@.last_name; <br></pre>
 
-### ConfigurationDbContext
-```bash
- dotnet ef migrations add -o Data/Migrations/IdentityServer/ConfigurationDb -p Reo.IdentityServer -c ConfigurationDbContext Initial
-```
+Поддерживаются:
 
-### PersistedGrantDbContext
+* арифметические операции
+* логические операции
+* создание массивов и списков ([X,Y])
+* **parseInt** и **parseDouble**
+* конкатенация (+)
+* конструкция **if**
+* фильтр массива по параметру (@.)
+* вызовы методов **API**, параметр **length**
+* циклы, используя оператор **while**
+* методы Javascript: **slice**, **push**, **pop**, **shift**, **unshift**, **splice**, **substr**, **split**
+* оператор **delete**
+* присваивания элементам маcсива,  например: row.user.action = "test";
+* поиск в массиве или строке — **indexOf**, например: "123".indexOf(2) = 1, [1, 2, 3].indexOf(3) = 2. Возвращает -1, если элемент не найден.
 
-```bash
- dotnet ef migrations add -o Data/Migrations/IdentityServer/PersistedGrantDb -p Reo.IdentityServer -c PersistedGrantDbContext Initial
-```
+В данный момент не поддерживается создание функций.
+
+Обращение к элементам массива с результатом какого-либо метода всего должно основываться на структуре JSON, а не XML. Например, правильным обращением является
+
+<tt>API.photos.search({"q":"Nature","count":3}).items@.owner_id;</tt>, а не
+
+<tt>API.photos.search({"q":"Nature","count":3}).items@.photo@.owner_id;</tt>
+
+ Метод **execute** также может использоваться и для получения результатов нескольких не связанных между собой запросов.
+
+Пример значений параметра code
+
+> <tt>return [API.users.isAppUser(), API.friends.get(), API.status.get()];</tt>
+
+> <tt>return {"user": API.users.isAppUser(), "friends": API.friends.get(), "status": API.status.get()};</tt>
+
+ В методе **execute** поддерживаются логические операции **<** (меньше), **>** (больше), **<=** (меньше или равно), **>=** (больше или равно), **==** (равно) и **!=** (не равно). В данный момент поддерживаются сравнения двух строк, двух чисел и строки и числа (в этом случае строка приводится к числу).
+
+ Результат логического выражения может быть использован в управляющей конструкции **if** ... [**else** ...]:
+
+Пример значения параметра code
+
+> <tt><pre>var posts = API.wall.get({"count": 1});
+> if (posts.count&lt;0) {
+>   return {"post": null, "copy_owner": null};
+> } else {
+>   var post = posts.items[0];
+>   var copy_owner=null;
+>   if (post.copy_history[0]){
+>     if (post.copy_history[0].owner_id &gt; 0) {
+>       copy_owner = API.users.get({"user_id": post.copy_history[0].owner_id})[0];
+>     } else
+>     if (post.copy_history[0].owner_id  &lt; 0) {
+>       copy_owner = API.groups.getById({"group_ids": -post.copy_history[0].owner_id})[0];
+>     }
+>     return {"post": post, "copy_owner": copy_owner};
+>   } else {
+>     return {"post": post, "copy_owner": null};
+>   }
+> }</pre></tt>
