@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!--
+	  Microsoft ResX Schema
+
+	  Version 2.0
+
+	  The primary goals of this format is to allow a simple XML format
+	  that is mostly human readable. The generation and parsing of the
+	  various data types are done through the TypeConverter classes
+	  associated with the data types.
+
+	  Example:
+
+	  ... ado.net/XML headers & schema ...
+	  <resheader name="resmimetype">text/microsoft-resx</resheader>
+	  <resheader name="version">2.0</resheader>
+	  <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+	  <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+	  <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+	  <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+	  <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+		  <value>[base64 mime encoded serialized .NET Framework object]</value>
+	  </data>
+	  <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+		  <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+		  <comment>This is a comment</comment>
+	  </data>
+
+	  There are any number of "resheader" rows that contain simple
+	  name/value pairs.
+
+	  Each data row contains a name, and value. The row also contains a
+	  type or mimetype. Type corresponds to a .NET class that support
+	  text/value conversion through the TypeConverter architecture.
+	  Classes that don't support this are serialized and stored with the
+	  mimetype set.
+
+	  The mimetype is used for serialized objects, and tells the
+	  ResXResourceReader how to depersist the object. This is currently not
+	  extensible. For a given mimetype the value must be set accordingly:
+
+	  Note - application/x-microsoft.net.object.binary.base64 is the format
+	  that the ResXResourceWriter will generate, however the reader can
+	  read any of the formats listed below.
+
+	  mimetype: application/x-microsoft.net.object.binary.base64
+	  value   : The object must be serialized with
+			  : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+			  : and then encoded with base64 encoding.
+
+	  mimetype: application/x-microsoft.net.object.soap.base64
+	  value   : The object must be serialized with
+			  : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			  : and then encoded with base64 encoding.
+	  mimetype: application/x-microsoft.net.object.bytearray.base64
+	  value   : The object must be serialized into a byte array
+			  : using a System.ComponentModel.TypeConverter
+			  : and then encoded with base64 encoding.
+	  -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ArgTypeExpected" xml:space="preserve">
+    <value>LE2001: Ожидается тип аргумента!</value>
+  </data>
+	<data name="ArgumentsExpected" xml:space="preserve">
+    <value>LE2003: Ожидаются аргументы для вызова метода!</value>
+  </data>
+	<data name="ArrayItem" xml:space="preserve">
+    <value>LE2004: Инициализатор массива должен содержать по крайней мере один элемент!</value>
+  </data>
+	<data name="AssignExpressionExpected" xml:space="preserve">
+    <value>LE2005: Ожидается присваиваемое выражение!</value>
+  </data>
+	<data name="AssignLvalueExpected" xml:space="preserve">
+    <value>LE2006: Выражению слева нельзя присвоить новое значение!</value>
+  </data>
+	<data name="CatchExpected" xml:space="preserve">
+    <value>LE2007: Ожидается блок catch!</value>
+  </data>
+	<data name="ClosingBraceNewLine" xml:space="preserve">
+    <value>LE2008: Закрывающая скобка должна располагаться на следующей строке!</value>
+  </data>
+	<data name="CodeBlockExpected" xml:space="preserve">
+    <value>LE2009: Ожидается блок кода!</value>
+  </data>
+	<data name="ConditionBlockExpected" xml:space="preserve">
+    <value>LE2010: Ожидается блок условия!</value>
+  </data>
+	<data name="ConditionExpected" xml:space="preserve">
+    <value>LE2011: Ожидается условие!</value>
+  </data>
+	<data name="ConditionExpressionExpected" xml:space="preserve">
+    <value>LE2012: Ожидается выражение условия!</value>
+  </data>
+	<data name="DictionaryItem" xml:space="preserve">
+    <value>LE2013: Инициализатор словаря должен содержать по крайней мере один элемент!</value>
+  </data>
+	<data name="DictionaryKeyExpected" xml:space="preserve">
+    <value>LE2014: Ожидается ключ для записи словаря!</value>
+  </data>
+	<data name="DictionaryValueExpected" xml:space="preserve">
+    <value>LE2015: Ожидается значение для записи словаря!</value>
+  </data>
+	<data name="ExceptionHandlerExpected" xml:space="preserve">
+    <value>LE2016: Ожидается блок-обработчик исключения!</value>
+  </data>
+	<data name="ExceptionTypeExpected" xml:space="preserve">
+    <value>LE2017: Ожидается тип обрабатываемого исключения!</value>
+  </data>
+	<data name="ExpressionExpected" xml:space="preserve">
+    <value>LE2018: Ожидается выражение!</value>
+  </data>
+	<data name="FunctionBodyExpected" xml:space="preserve">
+    <value>LE2019: Ожидается тело функции!</value>
+  </data>
+	<data name="FunctionDefExpected" xml:space="preserve">
+    <value>LE2020: Ожидается объявление функции!</value>
+  </data>
+	<data name="FunctionIdentifierExpected" xml:space="preserve">
+    <value>LE2021: Имя функции должно быть идентификатором!</value>
+  </data>
+	<data name="FunctionReturnExpected" xml:space="preserve">
+    <value>LE2022: Ожидается тип возвращаемого значения функции!</value>
+  </data>
+	<data name="IdentifierExpected" xml:space="preserve">
+    <value>LE2023: Ожидается идентификатор!</value>
+  </data>
+	<data name="IndexExpressionExpected" xml:space="preserve">
+    <value>LE2024: Ожидается выражение-индекс!</value>
+  </data>
+	<data name="InitExpressionExpected" xml:space="preserve">
+    <value>LE2025: Ожидается инициализирующее выражение!</value>
+  </data>
+	<data name="InitExpressionOrTypeExpected" xml:space="preserve">
+    <value>LE2026: Ожидается инициализирующее выражение или тип переменной!</value>
+  </data>
+	<data name="InitExpressionSeparatorExpected" xml:space="preserve">
+    <value>LE2027: Инициализирующие выражения должны располагаться на отдельных строках!</value>
+  </data>
+	<data name="InitializerIndentExprected" xml:space="preserve">
+    <value>LE2028: Инициализирующие выражения должны быть выделены отступом!</value>
+  </data>
+	<data name="InvalidDouble" xml:space="preserve">
+    <value>LE2029: Значение '{0}' не является допустимым дробным числом!</value>
+  </data>
+	<data name="InvalidInteger" xml:space="preserve">
+    <value>LE2030: Значение '{0}' не является допустимым целым числом!</value>
+  </data>
+	<data name="InvokePassSeparatorExpected" xml:space="preserve">
+    <value>LE2031: Выражения передачи значения должны располагаться на отдельных строках!</value>
+  </data>
+	<data name="ListItem" xml:space="preserve">
+    <value>LE2032: Инициализатор списка должен содержать по крайней мере один элемент!</value>
+  </data>
+	<data name="LoopBodyExpected" xml:space="preserve">
+    <value>LE2033: Ожидается тело цикла!</value>
+  </data>
+	<data name="LoopExpressionExpected" xml:space="preserve">
+    <value>LE2034: Ожидается выражение-тело цикла!</value>
+  </data>
+	<data name="MemberNameExpected" xml:space="preserve">
+    <value>LE2035: Ожидается имя поля!</value>
+  </data>
+	<data name="NamespaceExpected" xml:space="preserve">
+    <value>LE2037: Ожидается пространство имен!</value>
+  </data>
+	<data name="NewlineSeparatorExpected" xml:space="preserve">
+    <value>LE2038: Выражения должны располагаться на новых строках!</value>
+  </data>
+	<data name="RangeEndExpected" xml:space="preserve">
+    <value>LE2039: Ожидается выражение-конец диапазона!</value>
+  </data>
+	<data name="RecordFieldIdentifierExpected" xml:space="preserve">
+    <value>LE2040: Имя поля записи должно быть идентификатором!</value>
+  </data>
+	<data name="RecordFieldTypeExpected" xml:space="preserve">
+    <value>LE2041: Ожидается тип поля записи!</value>
+  </data>
+	<data name="RecordIdentifierExpected" xml:space="preserve">
+    <value>LE2042: Название записи должно быть идентификатором!</value>
+  </data>
+	<data name="RecordIndentExpected" xml:space="preserve">
+    <value>LE2043: Описание записи должно быть выделено отступами!</value>
+  </data>
+	<data name="RecordSeparatorExpected" xml:space="preserve">
+    <value>LE2044: Поля записи должны располагаться на отдельных строках!</value>
+  </data>
+	<data name="RefLvalueExpected" xml:space="preserve">
+    <value>LE2045: Модификатор 'ref' требует указания переменной, поля или индекса массива!</value>
+  </data>
+	<data name="SequenceExpected" xml:space="preserve">
+    <value>LE2046: Ожидается перечислимое выражение!</value>
+  </data>
+	<data name="SymbolExpected" xml:space="preserve">
+    <value>LE2047: Ожидается '{0}'!</value>
+  </data>
+	<data name="TryBlockExpected" xml:space="preserve">
+    <value>LE2048: Ожидается блок try!</value>
+  </data>
+	<data name="TupleItem" xml:space="preserve">
+    <value>LE2049: Инициализатор кортежа должен содержать по крайней мере один элемент!</value>
+  </data>
+	<data name="TypeArgumentExpected" xml:space="preserve">
+    <value>LE2050: Ожидается аргумент обобщенного типа!</value>
+  </data>
+	<data name="TypeIdentifierExpected" xml:space="preserve">
+    <value>LE2051: Имя типа должно быть идентификатором!</value>
+  </data>
+	<data name="TypeIndentExpected" xml:space="preserve">
+    <value>LE2052: Описание типа должно быть выделено отступами!</value>
+  </data>
+	<data name="TypeLabelIdentifierExpected" xml:space="preserve">
+    <value>LE2053: Имя метки типа должно быть идентификатором!</value>
+  </data>
+	<data name="TypeLabelTagTypeExpected" xml:space="preserve">
+    <value>LE2054: Ожидается тип связанного с меткой выражения!</value>
+  </data>
+	<data name="TypeSeparatorExpected" xml:space="preserve">
+    <value>LE2055: Метки должны располагаться на отдельных строках!</value>
+  </data>
+	<data name="TypeSignatureExpected" xml:space="preserve">
+    <value>LE2056: Ожидается подпись типа!</value>
+  </data>
+	<data name="UnknownStatement" xml:space="preserve">
+    <value>LE2057: Неизвестный тип выражения!</value>
+  </data>
+	<data name="VariadicByRef" xml:space="preserve">
+    <value>LE2060: Нельзя пометить аргумент, передающийся по ссылке, модификатором '...'!</value>
+  </data>
+	<data name="VarIdentifierExpected" xml:space="preserve">
+    <value>LE2061: Имя переменной должно быть идентификатором!</value>
+  </data>
+	<data name="VarTypeExpected" xml:space="preserve">
+    <value>LE2062: Ожидается подпись типа переменной!</value>
+  </data>
+	<data name="UsingBodyExpected" xml:space="preserve">
+    <value>LE2058: Ожидается тело блока управления ресурсом!</value>
+  </data>
+	<data name="UsingExpressionExpected" xml:space="preserve">
+    <value>LE2059: Ожидается выражение-тело блока управления ресурсом!</value>
+  </data>
+	<data name="ArgumentPassIndentExpected" xml:space="preserve">
+    <value>LE2002: Перед выражением '&lt;|' требуется отступ!</value>
+  </data>
+	<data name="MethodPassIndentExpected" xml:space="preserve">
+    <value>LE2036: Перед выражением '|&gt;' требуется отступ!</value>
+  </data>
+	<data name="InvalidFloat" xml:space="preserve">
+    <value>LE2063: Значение '{0}' не является допустимым дробным числом!</value>
+  </data>
+	<data name="InvalidDecimal" xml:space="preserve">
+    <value>LE2065: Значение '{0}' не является допустимым десятичным числом!</value>
+  </data>
+	<data name="InvalidLong" xml:space="preserve">
+    <value>LE2064: Значение '{0}' не является допустимым целым числом!</value>
+  </data>
+	<data name="MatchExpressionExpected" xml:space="preserve">
+    <value>LE2066: Ожидается выражение для сопоставления с образцом!</value>
+  </data>
+	<data name="MatchIndentExpected" xml:space="preserve">
+    <value>LE2068: Правила сопоставления должны быть выделены отступами!</value>
+  </data>
+	<data name="MatchRuleExpected" xml:space="preserve">
+    <value>LE2069: Ожидается правило сопоставления!</value>
+  </data>
+	<data name="WhenGuardExpressionExpected" xml:space="preserve">
+    <value>LE2067: Ожидается проверочное выражение!</value>
+  </data>
+</root>
