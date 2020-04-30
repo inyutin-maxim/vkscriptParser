@@ -15,8 +15,8 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Инициализация описания лексемы через регулярное выражение
 		/// </summary>
-		/// <param name="regex">Регулярное выражение</param>
-		/// <param name="type">Тип лексемы</param>
+		/// <param name="regex"> Регулярное выражение </param>
+		/// <param name="type"> Тип лексемы </param>
 		public VkScriptRegexLexemeDefinition(string regex, VkScriptLexemeType type) : base(type)
 		{
 			Regex = new Regex(@"\G" + regex, RegexOptions.Compiled);

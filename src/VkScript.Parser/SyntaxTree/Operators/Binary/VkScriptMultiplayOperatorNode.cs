@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VkScript.Parser.Abstractions;
 
 namespace VkScript.Parser.SyntaxTree.Operators.Binary
@@ -12,7 +9,7 @@ namespace VkScript.Parser.SyntaxTree.Operators.Binary
 	{
 		protected override string OperatorRepresentation => "*";
 
-		protected override VkScriptBinaryOperator ReСreateSelfWithArgs(VkScriptSyntaxNode left, VkScriptSyntaxNode right)
+		protected override VkScriptBinaryOperator RecreateSelfWithArgs(VkScriptSyntaxNode left, VkScriptSyntaxNode right)
 		{
 			return new VkScriptMultiplayOperatorNode { LeftOperand = left, RightOperand = right };
 		}

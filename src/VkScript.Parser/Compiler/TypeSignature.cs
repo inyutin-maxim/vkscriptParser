@@ -6,189 +6,229 @@ using VkScript.Parser.SyntaxTree;
 namespace VkScript.Parser.Compiler
 {
 	/// <summary>
-    /// A cache-friendly version of type signature.
-    /// </summary>
+	/// A cache-friendly version of type signature.
+	/// </summary>
 	public class TypeSignature : LocationEntity
-    {
-        #region Constructors
+	{
+	#region Static fields
 
-        public TypeSignature(string name, params TypeSignature[] args)
-            : this(name, null, args)
-        {
-        }
+		/// <summary>
+		/// List of available postfixes.
+		/// </summary>
+		private static readonly string[] Postfixes = { "[]", "?", "~" };
 
-        public TypeSignature(string name, string postfix, params TypeSignature[] args)
-        {
-            Name = name;
-            Arguments = args.Length > 0 ? args : null;
-            Postfix = postfix;
-            FullSignature = GetSignature(name, args);
-        }
+	#endregion
 
-        #endregion
+	#region Debug
 
-        #region Static fields
+		public override string ToString()
+		{
+			return FullSignature;
+		}
 
-        /// <summary>
-        /// List of available postfixes.
-        /// </summary>
-        private static readonly string[] Postfixes = {"[]", "?", "~"};
+	#endregion
 
-        #endregion
+	#region Constructors
 
-        #region Fields
+		public TypeSignature(string name, params TypeSignature[] args)
+			: this(name, null, args)
+		{
+		}
 
-        /// <summary>
-        /// The name of the type. Like 'int', or 'Dictionary'.
-        /// </summary>
-        public readonly string Name;
+		public TypeSignature(string name, string postfix, params TypeSignature[] args)
+		{
+			Name = name;
+			Arguments = args.Length > 0 ? args : null;
+			Postfix = postfix;
+			FullSignature = GetSignature(name, args);
+		}
 
-        /// <summary>
-        /// List of generic argument type signatures (if any).
-        /// </summary>
-        public readonly TypeSignature[] Arguments;
+	#endregion
 
-        /// <summary>
-        /// Special postfix character:
-        /// [] = array,
-        /// ? = Nullable
-        /// ~ = IEnumerable
-        /// </summary>
-        public readonly string Postfix;
+	#region Fields
 
-        /// <summary>
-        /// Complete signature with all arguments, postfixes, etc.
-        /// </summary>
-        public readonly string FullSignature;
+		/// <summary>
+		/// The name of the type. Like 'int', or 'Dictionary'.
+		/// </summary>
+		public readonly string Name;
 
-        #endregion
+		/// <summary>
+		/// List of generic argument type signatures (if any).
+		/// </summary>
+		public readonly TypeSignature[] Arguments;
 
-        #region Static constructors
+		/// <summary>
+		/// Special postfix character:
+		/// [] = array,
+		/// ? = Nullable
+		/// ~ = IEnumerable
+		/// </summary>
+		public readonly string Postfix;
 
-        /// <summary>
-        /// Initializes a type signature with it's string representation.
-        /// </summary>
-        public static implicit operator TypeSignature(string type)
-        {
-            return type == null ? null : Parse(type);
-        }
+		/// <summary>
+		/// Complete signature with all arguments, postfixes, etc.
+		/// </summary>
+		public readonly string FullSignature;
 
-        /// <summary>
-        /// Parses the type signature.
-        /// </summary>
-        public static TypeSignature Parse(string signature)
-        {
-            if (signature[0] == ' ' || signature[signature.Length - 1] == ' ')
-                signature = signature.Trim();
+	#endregion
 
-            foreach (var postfix in Postfixes)
-                if (signature.EndsWith(postfix))
-                    return new TypeSignature(null, postfix, Parse(signature.Substring(0, signature.Length - postfix.Length)));
+	#region Static constructors
 
-            var open = signature.IndexOf('<');
-            if (open == -1)
-                return new TypeSignature(signature);
+		/// <summary>
+		/// Initializes a type signature with it's string representation.
+		/// </summary>
+		public static implicit operator TypeSignature(string type)
+		{
+			return type == null ? null : Parse(type);
+		}
 
-            var close = signature.LastIndexOf('>');
-            var args = ParseTypeArgs(signature.Substring(open + 1, close - open - 1)).ToArray();
-            var typeName = signature.Substring(0, open);
+		/// <summary>
+		/// Parses the type signature.
+		/// </summary>
+		public static TypeSignature Parse(string signature)
+		{
+			if (signature[0] == ' ' || signature[signature.Length - 1] == ' ')
+			{
+				signature = signature.Trim();
+			}
 
-            return new TypeSignature(typeName, args);
-        }
+			foreach (var postfix in Postfixes)
+			{
+				if (signature.EndsWith(postfix))
+				{
+					return new TypeSignature(null, postfix, Parse(signature.Substring(0, signature.Length - postfix.Length)));
+				}
+			}
 
-        #endregion
+			var open = signature.IndexOf('<');
 
-        #region Helpers
+			if (open == -1)
+			{
+				return new TypeSignature(signature);
+			}
 
-        /// <summary>
-        /// Builds the full string representation of the signature tree.
-        /// </summary>
-        private string GetSignature(string name, TypeSignature[] args)
-        {
-            if (args.Length == 0)
-                return name;
+			var close = signature.LastIndexOf('>');
+			var args = ParseTypeArgs(signature.Substring(open + 1, close - open - 1)).ToArray();
+			var typeName = signature.Substring(0, open);
 
-            if (!string.IsNullOrEmpty(Postfix))
-                return Arguments[0].FullSignature + Postfix;
+			return new TypeSignature(typeName, args);
+		}
 
-            var sb = new StringBuilder(name);
-            sb.Append("<");
+	#endregion
 
-            var idx = 0;
-            foreach (var curr in args)
-            {
-                if (idx > 0)
-                    sb.Append(", ");
+	#region Helpers
 
-                sb.Append(curr.FullSignature);
+		/// <summary>
+		/// Builds the full string representation of the signature tree.
+		/// </summary>
+		private string GetSignature(string name, TypeSignature[] args)
+		{
+			if (args.Length == 0)
+			{
+				return name;
+			}
 
-                idx++;
-            }
+			if (!string.IsNullOrEmpty(Postfix))
+			{
+				return Arguments[0].FullSignature + Postfix;
+			}
 
-            sb.Append(">");
+			var sb = new StringBuilder(name);
+			sb.Append("<");
 
-            return sb.ToString();
-        }
+			var idx = 0;
 
-        /// <summary>
-        /// Parses out the list of generic type arguments delimited by commas.
-        /// </summary>
-        private static IEnumerable<TypeSignature> ParseTypeArgs(string args)
-        {
-            var depth = 0;
-            var start = 0;
-            var len = args.Length;
-            for (var idx = 0; idx < len; idx++)
-            {
-                if (args[idx] == '<') depth++;
-                if (args[idx] == '>') depth--;
-                if (depth == 0 && args[idx] == ',')
-                {
-                    yield return Parse(args.Substring(start, idx - start));
-                    start = idx + 1;
-                }
-            }
+			foreach (var curr in args)
+			{
+				if (idx > 0)
+				{
+					sb.Append(", ");
+				}
 
-            yield return Parse(args.Substring(start, args.Length - start));
-        }
+				sb.Append(curr.FullSignature);
 
-        #endregion
+				idx++;
+			}
 
-        #region Debug
+			sb.Append(">");
 
-        public override string ToString()
-        {
-            return FullSignature;
-        }
+			return sb.ToString();
+		}
 
-        #endregion
+		/// <summary>
+		/// Parses out the list of generic type arguments delimited by commas.
+		/// </summary>
+		private static IEnumerable<TypeSignature> ParseTypeArgs(string args)
+		{
+			var depth = 0;
+			var start = 0;
+			var len = args.Length;
 
-        #region Equality
+			for (var idx = 0; idx < len; idx++)
+			{
+				if (args[idx] == '<')
+				{
+					depth++;
+				}
 
-        protected bool Equals(TypeSignature other)
-        {
-            var basic = string.Equals(Name, other.Name)
-                        && string.Equals(Postfix, other.Postfix);
+				if (args[idx] == '>')
+				{
+					depth--;
+				}
 
-            if (!basic || (Arguments == null ^ other.Arguments == null))
-                return false;
+				if (depth == 0 && args[idx] == ',')
+				{
+					yield return Parse(args.Substring(start, idx - start));
 
-            return Arguments == null || Arguments.SequenceEqual(other.Arguments);
-        }
+					start = idx + 1;
+				}
+			}
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((TypeSignature) obj);
-        }
+			yield return Parse(args.Substring(start, args.Length - start));
+		}
 
-        public override int GetHashCode()
-        {
-            return FullSignature.GetHashCode();
-        }
+	#endregion
 
-        #endregion
-    }
+	#region Equality
+
+		protected bool Equals(TypeSignature other)
+		{
+			var basic = string.Equals(Name, other.Name)
+						&& string.Equals(Postfix, other.Postfix);
+
+			if (!basic || (Arguments == null)^(other.Arguments == null))
+			{
+				return false;
+			}
+
+			return Arguments == null || Arguments.SequenceEqual(other.Arguments);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj))
+			{
+				return false;
+			}
+
+			if (ReferenceEquals(this, obj))
+			{
+				return true;
+			}
+
+			if (obj.GetType() != GetType())
+			{
+				return false;
+			}
+
+			return Equals((TypeSignature) obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return FullSignature.GetHashCode();
+		}
+
+	#endregion
+	}
 }

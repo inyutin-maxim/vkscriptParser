@@ -31,7 +31,7 @@ internal class Build : NukeBuild
 
 	private AbsolutePath OutputDirectory => RootDirectory / "output";
 
-	Target Clean => _ => _
+	private Target Clean => _ => _
 		.Before(Restore)
 		.Executes(() =>
 		{
@@ -40,7 +40,7 @@ internal class Build : NukeBuild
 			EnsureCleanDirectory(OutputDirectory);
 		});
 
-	Target Restore => _ => _
+	private Target Restore => _ => _
 		.Executes(() =>
 		{
 			DotNetRestore(s => s
@@ -58,7 +58,7 @@ internal class Build : NukeBuild
 				.SetNoBuild(false));
 		});
 
-	Target Compile => _ => _
+	private Target Compile => _ => _
 		.DependsOn(Restore)
 		.Executes(() =>
 		{
@@ -76,5 +76,8 @@ internal class Build : NukeBuild
 	/// - JetBrains Rider            https://nuke.build/rider
 	/// - Microsoft VisualStudio     https://nuke.build/visualstudio
 	/// - Microsoft VSCode           https://nuke.build/vscode
-	public static int Main() => Execute<Build>(x => x.RunTests);
+	public static int Main()
+	{
+		return Execute<Build>(x => x.RunTests);
+	}
 }

@@ -17,7 +17,6 @@ namespace VkScript.Parser.Abstractions
 
 	#endregion
 
-
 	#region Constant checkers
 
 		/// <summary>
@@ -37,8 +36,8 @@ namespace VkScript.Parser.Abstractions
 		/// <summary>
 		/// Сообщает об ошибке компилятору.
 		/// </summary>
-		/// <param name="message">Сообщение об ошибке.</param>
-		/// <param name="args">Необязательные аргументы ошибки.</param>
+		/// <param name="message"> Сообщение об ошибке. </param>
+		/// <param name="args"> Необязательные аргументы ошибки. </param>
 		[ContractAnnotation("=> halt")]
 		[DebuggerStepThrough]
 		protected void Error(string message, params object[] args)
@@ -49,9 +48,9 @@ namespace VkScript.Parser.Abstractions
 		/// <summary>
 		/// Сообщает об ошибке компилятору.
 		/// </summary>
-		/// <param name="entity">Местоположение объекта, с которым связана ошибка.</param>
-		/// <param name="message">Сообщение об ошибке.</param>
-		/// <param name="args">Необязательные аргументы ошибки.</param>
+		/// <param name="entity"> Местоположение объекта, с которым связана ошибка. </param>
+		/// <param name="message"> Сообщение об ошибке. </param>
+		/// <param name="args"> Необязательные аргументы ошибки. </param>
 		[ContractAnnotation("=> halt")]
 		[DebuggerStepThrough]
 		protected void Error(LocationEntity entity, string message, params object[] args)

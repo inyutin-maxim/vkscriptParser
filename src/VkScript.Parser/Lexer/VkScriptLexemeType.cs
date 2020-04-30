@@ -4,7 +4,9 @@ namespace VkScript.Parser.Lexer
 	/// Тип лексемы
 	/// </summary>
 	/// <remarks>
-	/// Скопировано из <see href="https://github.com/impworks/lens/blob/master/Lens/Lexer/LexemType.cs"/>
+	/// Скопировано из
+	/// <see
+	///     href="https://github.com/impworks/lens/blob/master/Lens/Lexer/LexemType.cs" />
 	/// </remarks>
 	public enum VkScriptLexemeType
 	{
@@ -44,7 +46,7 @@ namespace VkScript.Parser.Lexer
 		While,
 
 		/// <summary>
-		/// Цикл <c>do {} while(bool)</c>, бесконечный цикл с постусловием
+		/// Цикл <c> do {} while(bool) </c>, бесконечный цикл с постусловием
 		/// </summary>
 		Do,
 

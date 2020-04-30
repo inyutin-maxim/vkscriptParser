@@ -6,17 +6,17 @@
 	public abstract class VkScriptLexemeDefinitionBase
 	{
 		/// <summary>
-		/// Тип лексемы
-		/// </summary>
-		public VkScriptLexemeType Type { get; }
-
-		/// <summary>
 		/// Инициализация определения лексемы
 		/// </summary>
-		/// <param name="type">Тип лексемы</param>
+		/// <param name="type"> Тип лексемы </param>
 		protected VkScriptLexemeDefinitionBase(VkScriptLexemeType type)
 		{
 			Type = type;
 		}
+
+		/// <summary>
+		/// Тип лексемы
+		/// </summary>
+		public VkScriptLexemeType Type { get; }
 	}
 }

@@ -91,7 +91,7 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Проверка начала строкового литерала
 		/// </summary>
-		/// <returns></returns>
+		/// <returns> </returns>
 		private bool IsStringBegin()
 		{
 			return GetCurrentChar() == '"' || GetCurrentChar() == '\'';
@@ -262,7 +262,8 @@ namespace VkScript.Parser.Lexer
 		}
 
 		/// <summary>
-		/// Попытки найти любую из заданных лексем, определенных в регулярном выражении, в текущей позиции в строке.
+		/// Попытки найти любую из заданных лексем, определенных в регулярном выражении, в
+		/// текущей позиции в строке.
 		/// </summary>
 		private VkScriptLexeme ProcessRegexLexeme()
 		{
@@ -313,7 +314,7 @@ namespace VkScript.Parser.Lexer
 		/// <summary>
 		/// Проверка на окончание строки
 		/// </summary>
-		/// <returns></returns>
+		/// <returns> </returns>
 		private bool IsEndOfLine()
 		{
 			return GetCurrentChar() == '\r' && GetNextChar() == '\n';

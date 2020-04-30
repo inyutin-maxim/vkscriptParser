@@ -64,7 +64,7 @@ namespace VkScript.Parser.SyntaxTree.Declarations.Locals
 		{
 			unchecked
 			{
-				int hashCode = IsConstant.GetHashCode();
+				var hashCode = IsConstant.GetHashCode();
 				hashCode = (hashCode * 397)^(Name != null ? Name.GetHashCode() : 0);
 				hashCode = (hashCode * 397)^(Value != null ? Value.GetHashCode() : 0);
 

@@ -4,140 +4,157 @@ using System.Reflection.Emit;
 
 namespace VkScript.Parser.Compiler
 {
-	 /// <summary>
-    /// A class representing info about a local variable.
-    /// </summary>
+	/// <summary>
+	/// A class representing info about a local variable.
+	/// </summary>
 	public class Local
-    {
-        #region Constructors
+	{
+	#region Methods
 
-        /// <summary>
-        /// Creates a new instance of the Local variable.
-        /// </summary>
-        public Local(string name, Type type, bool isConst = false, bool isRefArg = false)
-        {
-            Name = name;
-            Type = type;
-            IsImmutable = isConst;
-            IsRefArgument = isRefArg;
-        }
+		/// <summary>
+		/// Create a copy of the name information and bind it to the distance.
+		/// </summary>
+		public Local GetClosuredCopy(int distance)
+		{
+			return new Local(this, distance);
+		}
 
-        /// <summary>
-        /// Copy constructor for closured versions of the local.
-        /// </summary>
-        private Local(Local other, int dist = 0)
-        {
-            Name = other.Name;
-            Type = other.Type;
-            IsImmutable = other.IsImmutable;
-            IsRefArgument = other.IsRefArgument;
+	#endregion
 
-            IsClosured = other.IsClosured;
-            ClosureFieldName = other.ClosureFieldName;
+	#region Debug
 
-            IsConstant = other.IsConstant;
-            ConstantValue = other.ConstantValue;
+		public override string ToString()
+		{
+			var entities = new List<string>();
 
-            LocalBuilder = other.LocalBuilder;
-            ArgumentId = other.ArgumentId;
+			if (IsClosured)
+			{
+				entities.Add("closured");
+			}
 
-            ClosureDistance = dist;
-        }
+			if (IsRefArgument)
+			{
+				entities.Add("ref");
+			}
 
-        #endregion
+			if (IsImmutable)
+			{
+				entities.Add("immutable");
+			}
 
-        #region Fields
+			if (IsConstant)
+			{
+				entities.Add("const");
+			}
 
-        /// <summary>
-        /// Variable name.
-        /// </summary>
-        public readonly string Name;
+			if (ArgumentId != null)
+			{
+				entities.Add($"arg({ArgumentId})");
+			}
 
-        /// <summary>
-        /// Variable type.
-        /// </summary>
-        public readonly Type Type;
+			return string.Format("{0}:{1} ({2})",
+				Name,
+				Type.Name,
+				string.Join(", ", entities));
+		}
 
-        /// <summary>
-        /// Is the name a constant or a variable?
-        /// </summary>
-        public readonly bool IsImmutable;
+	#endregion
 
-        /// <summary>
-        /// Does the variable represent a function argument that is passed by ref?
-        /// </summary>
-        public readonly bool IsRefArgument;
+	#region Constructors
 
-        /// <summary>
-        /// The ID of the argument if this name represents one.
-        /// </summary>
-        public int? ArgumentId;
+		/// <summary>
+		/// Creates a new instance of the Local variable.
+		/// </summary>
+		public Local(string name, Type type, bool isConst = false, bool isRefArg = false)
+		{
+			Name = name;
+			Type = type;
+			IsImmutable = isConst;
+			IsRefArgument = isRefArg;
+		}
 
-        /// <summary>
-        /// Is the name referenced in nested scopes?
-        /// </summary>
-        public bool IsClosured;
+		/// <summary>
+		/// Copy constructor for closured versions of the local.
+		/// </summary>
+		private Local(Local other, int dist = 0)
+		{
+			Name = other.Name;
+			Type = other.Type;
+			IsImmutable = other.IsImmutable;
+			IsRefArgument = other.IsRefArgument;
 
-        /// <summary>
-        /// The distance between the current scope and the scope that owns this variable.
-        /// </summary>
-        public int? ClosureDistance;
+			IsClosured = other.IsClosured;
+			ClosureFieldName = other.ClosureFieldName;
 
-        /// <summary>
-        /// The name of the field in closured class.
-        /// </summary>
-        public string ClosureFieldName;
+			IsConstant = other.IsConstant;
+			ConstantValue = other.ConstantValue;
 
-        /// <summary>
-        /// The local builder identifier.
-        /// </summary>
-        public LocalBuilder LocalBuilder;
+			LocalBuilder = other.LocalBuilder;
+			ArgumentId = other.ArgumentId;
 
-        /// <summary>
-        /// Checks if the current local name represents a constant.
-        /// Must also be immutable!
-        /// </summary>
-        public bool IsConstant;
+			ClosureDistance = dist;
+		}
 
-        /// <summary>
-        /// The compile-time constant value for current local name.
-        /// </summary>
-        public dynamic ConstantValue;
+	#endregion
 
-        #endregion
+	#region Fields
 
-        #region Methods
+		/// <summary>
+		/// Variable name.
+		/// </summary>
+		public readonly string Name;
 
-        /// <summary>
-        /// Create a copy of the name information and bind it to the distance.
-        /// </summary>
-        public Local GetClosuredCopy(int distance)
-        {
-            return new Local(this, distance);
-        }
+		/// <summary>
+		/// Variable type.
+		/// </summary>
+		public readonly Type Type;
 
-        #endregion
+		/// <summary>
+		/// Is the name a constant or a variable?
+		/// </summary>
+		public readonly bool IsImmutable;
 
-        #region Debug
+		/// <summary>
+		/// Does the variable represent a function argument that is passed by ref?
+		/// </summary>
+		public readonly bool IsRefArgument;
 
-        public override string ToString()
-        {
-            var entities = new List<string>();
+		/// <summary>
+		/// The ID of the argument if this name represents one.
+		/// </summary>
+		public int? ArgumentId;
 
-            if (IsClosured) entities.Add("closured");
-            if (IsRefArgument) entities.Add("ref");
-            if (IsImmutable) entities.Add("immutable");
-            if (IsConstant) entities.Add("const");
-            if (ArgumentId != null) entities.Add($"arg({ArgumentId})");
+		/// <summary>
+		/// Is the name referenced in nested scopes?
+		/// </summary>
+		public bool IsClosured;
 
-            return string.Format(
-                "{0}:{1} ({2})",
-                Name,
-                Type.Name,
-                string.Join(", ", entities)
-            );
-        }
+		/// <summary>
+		/// The distance between the current scope and the scope that owns this variable.
+		/// </summary>
+		public int? ClosureDistance;
 
-        #endregion
-    }
+		/// <summary>
+		/// The name of the field in closured class.
+		/// </summary>
+		public string ClosureFieldName;
+
+		/// <summary>
+		/// The local builder identifier.
+		/// </summary>
+		public LocalBuilder LocalBuilder;
+
+		/// <summary>
+		/// Checks if the current local name represents a constant.
+		/// Must also be immutable!
+		/// </summary>
+		public bool IsConstant;
+
+		/// <summary>
+		/// The compile-time constant value for current local name.
+		/// </summary>
+		public dynamic ConstantValue;
+
+	#endregion
+	}
 }

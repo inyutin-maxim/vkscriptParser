@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using VkScript.Parser.Abstractions;
 
 namespace VkScript.Parser.SyntaxTree.Operators
@@ -23,6 +20,5 @@ namespace VkScript.Parser.SyntaxTree.Operators
 		protected virtual string OverloadedMethodName => null;
 
 	#endregion
-
 	}
 }

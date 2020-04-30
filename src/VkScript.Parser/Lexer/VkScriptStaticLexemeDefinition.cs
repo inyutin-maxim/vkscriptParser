@@ -13,8 +13,8 @@
 		/// <summary>
 		/// Инициализация описания статической лексемы
 		/// </summary>
-		/// <param name="representation">Представление</param>
-		/// <param name="type">Тип лексемы</param>
+		/// <param name="representation"> Представление </param>
+		/// <param name="type"> Тип лексемы </param>
 		public VkScriptStaticLexemeDefinition(string representation, VkScriptLexemeType type) : base(type)
 		{
 			Representation = representation;

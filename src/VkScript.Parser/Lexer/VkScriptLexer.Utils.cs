@@ -24,7 +24,7 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("var", VkScriptLexemeType.Var),
 			new VkScriptStaticLexemeDefinition("null", VkScriptLexemeType.Null),
 			new VkScriptStaticLexemeDefinition("return", VkScriptLexemeType.Return),
-			new VkScriptStaticLexemeDefinition("delete", VkScriptLexemeType.Delete),
+			new VkScriptStaticLexemeDefinition("delete", VkScriptLexemeType.Delete)
 		};
 
 		/// <summary>
@@ -80,6 +80,37 @@ namespace VkScript.Parser.Lexer
 			new VkScriptRegexLexemeDefinition(@"([a-zA-Z_][0-9a-zA-Z_]*)", VkScriptLexemeType.Identifier)
 		};
 
+	#region Escaping
+
+		/// <summary>
+		/// Возвращает экранированную версию данного символа.
+		/// </summary>
+		private char EscapeChar(char input)
+		{
+			switch (input)
+			{
+				case 't':
+					return '\t';
+
+				case 'n':
+					return '\n';
+
+				case 'r':
+					return '\r';
+
+				case '\\':
+				case '"':
+				case '\'':
+					return input;
+			}
+
+			Error(LexerMessages.UnknownEscape, input);
+
+			return ' ';
+		}
+
+	#endregion
+
 	#region Helper methods
 
 		/// <summary>
@@ -118,7 +149,8 @@ namespace VkScript.Parser.Lexer
 		}
 
 		/// <summary>
-		/// Выдает новое исключение, привязанное к текущему местоположению в проанализированном тексте.
+		/// Выдает новое исключение, привязанное к текущему местоположению в
+		/// проанализированном тексте.
 		/// </summary>
 		[ContractAnnotation("=> halt")]
 		[DebuggerStepThrough]
@@ -159,7 +191,6 @@ namespace VkScript.Parser.Lexer
 			Skip(2);
 
 			return true;
-
 		}
 
 		/// <summary>
@@ -183,37 +214,6 @@ namespace VkScript.Parser.Lexer
 				Line = _line,
 				Offset = _offset
 			};
-		}
-
-	#endregion
-
-	#region Escaping
-
-		/// <summary>
-		/// Возвращает экранированную версию данного символа.
-		/// </summary>
-		private char EscapeChar(char input)
-		{
-			switch (input)
-			{
-				case 't':
-					return '\t';
-
-				case 'n':
-					return '\n';
-
-				case 'r':
-					return '\r';
-
-				case '\\':
-				case '"':
-				case '\'':
-					return input;
-			}
-
-			Error(LexerMessages.UnknownEscape, input);
-
-			return ' ';
 		}
 
 	#endregion
