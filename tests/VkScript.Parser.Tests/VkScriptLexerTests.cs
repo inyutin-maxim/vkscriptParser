@@ -1006,5 +1006,20 @@ namespace VkScript.Parser.Tests
 			Assert.NotEmpty(result);
 			Assert.Single(result, x => x.Type == VkScriptLexemeType.Modulus);
 		}
+
+		[Fact]
+		public void ContainsSingleDuobleXorLexeme()
+		{
+			// Arrange
+			var service = _mocker.CreateInstance<VkScriptLexer>();
+
+			// Act
+			var result = service.Parse("return true^^false;");
+
+			// Assert
+			Assert.NotNull(result);
+			Assert.NotEmpty(result);
+			Assert.Single(result, x => x.Type == VkScriptLexemeType.DoubleXor);
+		}
 	}
 }
