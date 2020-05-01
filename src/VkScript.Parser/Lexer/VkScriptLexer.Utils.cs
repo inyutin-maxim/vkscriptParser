@@ -65,7 +65,8 @@ namespace VkScript.Parser.Lexer
 			new VkScriptStaticLexemeDefinition("|", VkScriptLexemeType.BitOr),
 			new VkScriptStaticLexemeDefinition("~", VkScriptLexemeType.BitNot),
 			new VkScriptStaticLexemeDefinition("^", VkScriptLexemeType.ExcludingOr),
-			new VkScriptStaticLexemeDefinition("@.", VkScriptLexemeType.ArrayFilter)
+			new VkScriptStaticLexemeDefinition("@.", VkScriptLexemeType.ArrayFilter),
+			new VkScriptStaticLexemeDefinition("%", VkScriptLexemeType.Modulus)
 		};
 
 		/// <summary>

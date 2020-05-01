@@ -199,6 +199,11 @@ namespace VkScript.Parser.Lexer
 		Equal,
 
 		/// <summary>
+		/// Остаток от деления
+		/// </summary>
+		Modulus,
+
+		/// <summary>
 		/// Логическое ИЛИ
 		/// </summary>
 		Or,
