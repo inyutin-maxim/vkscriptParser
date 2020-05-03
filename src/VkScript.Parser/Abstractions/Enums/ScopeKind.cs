@@ -1,36 +1,33 @@
 namespace VkScript.Parser.Abstractions.Enums
 {
 	/// <summary>
-	/// A kind of type entity defined in the type manager.
+	/// Сущность определенная в менеджере типов
 	/// </summary>
 	public enum ScopeKind
 	{
 		/// <summary>
-		/// Scope has no 
+		/// Нет области видимости
 		/// </summary>
 		Unclosured,
 
 		/// <summary>
-		/// Scope is the root of a static user-defined function (including Main).
-		/// Closure parent is not used.
+		/// Область вилимости является корнем статической функции
 		/// </summary>
 		FunctionRoot,
 
 		/// <summary>
-		/// Scope is within a loop.
-		/// Closure parent is loaded from a local variable.
+		/// Область видимости находится в цикле
 		/// </summary>
 		Loop,
 
 		/// <summary>
-		/// Scope is the root of a lambda function.
-		/// Closure parent is loaded from 'this' pointer.
+		/// Область видимости - корень лямбда выражения
 		/// </summary>
 		LambdaRoot,
 
 		/// <summary>
-		/// Special case for match node's root scope.
-		/// Makes each of the nested expression blocks explicitly return the value.
+		/// Особый случай для соответствия нод корневой области видимости
+		/// Заставляет каждый из вложенных блоков выражений явно возвращать значение.
 		/// </summary>
 		MatchRoot
 	}

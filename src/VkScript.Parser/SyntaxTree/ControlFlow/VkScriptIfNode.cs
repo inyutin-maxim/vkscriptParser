@@ -19,17 +19,17 @@ namespace VkScript.Parser.SyntaxTree.ControlFlow
 	#region Fields
 
 		/// <summary>
-		/// The condition.
+		/// Состояние
 		/// </summary>
 		public VkScriptSyntaxNode Condition { get; set; }
 
 		/// <summary>
-		/// The block of code to be executed if the condition is true.
+		/// Блок кода, который будет выполнен, если условие true.
 		/// </summary>
 		public VkScriptCodeBlockNode TrueAction { get; set; }
 
 		/// <summary>
-		/// The block of code to be executed if the condition is false.
+		/// Блок кода, который будет выполнен, если условие false.
 		/// </summary>
 		public VkScriptCodeBlockNode FalseAction { get; set; }
 

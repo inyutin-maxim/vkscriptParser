@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.Annotations;
@@ -10,6 +10,31 @@ namespace VkScript.Parser.Parser
 {
 	public partial class VkScriptParser
 	{
+		#region Operators
+
+		/// <summary>
+		/// List of binary operator lexems (for shorthand assignment checking).
+		/// </summary>
+		private static readonly VkScriptLexemeType[] BinaryOperators =
+		{
+			VkScriptLexemeType.BitAnd,
+			VkScriptLexemeType.BitOr,
+			VkScriptLexemeType.BitOr,
+			VkScriptLexemeType.And,
+			VkScriptLexemeType.Or,
+			VkScriptLexemeType.ExcludingOr,
+			VkScriptLexemeType.LeftShift,
+			VkScriptLexemeType.RightShift,
+			VkScriptLexemeType.Plus,
+			VkScriptLexemeType.Minus,
+			VkScriptLexemeType.Multiply,
+			VkScriptLexemeType.Divide,
+			VkScriptLexemeType.Modulus
+		};
+
+
+
+		#endregion
 		/// <summary>
 		/// Выдает ошибку, связанную с текущей лексемой.
 		/// </summary>
@@ -18,7 +43,7 @@ namespace VkScript.Parser.Parser
 		private void Error(string msg, params object[] args)
 		{
 			throw new VkScriptCompilerException(string.Format(msg, args),
-				_lexemes[_lexemeId]);
+				_lexems[_lexemId]);
 		}
 
 		/// <summary>
@@ -38,8 +63,8 @@ namespace VkScript.Parser.Parser
 		{
 			foreach (var curr in types)
 			{
-				var id = Math.Min(_lexemeId + offset, _lexemes.Length - 1);
-				var lex = _lexemes[id];
+				var id = Math.Min(_lexemId + offset, _lexems.Length - 1);
+				var lex = _lexems[id];
 
 				if (lex.Type != curr)
 				{
@@ -58,8 +83,8 @@ namespace VkScript.Parser.Parser
 		[UsedImplicitly]
 		private bool PeekAny(params VkScriptLexemeType[] types)
 		{
-			var id = Math.Min(_lexemeId, _lexemes.Length - 1);
-			var lex = _lexemes[id];
+			var id = Math.Min(_lexemId, _lexems.Length - 1);
+			var lex = _lexems[id];
 
 			return lex.Type.IsAnyOf(types);
 		}
@@ -71,7 +96,7 @@ namespace VkScript.Parser.Parser
 		[UsedImplicitly]
 		private VkScriptLexeme Ensure(VkScriptLexemeType type, string msg, params object[] args)
 		{
-			var lex = _lexemes[_lexemeId];
+			var lex = _lexems[_lexemId];
 
 			if (lex.Type != type)
 			{
@@ -89,7 +114,7 @@ namespace VkScript.Parser.Parser
 		[DebuggerStepThrough]
 		private bool Check(VkScriptLexemeType lexeme)
 		{
-			var lex = _lexemes[_lexemeId];
+			var lex = _lexems[_lexemId];
 
 			if (lex.Type != lexeme)
 			{
@@ -108,7 +133,7 @@ namespace VkScript.Parser.Parser
 		[UsedImplicitly]
 		private string GetValue()
 		{
-			var value = _lexemes[_lexemeId].Value;
+			var value = _lexems[_lexemId].Value;
 			Skip();
 
 			return value;
@@ -120,7 +145,7 @@ namespace VkScript.Parser.Parser
 		[DebuggerStepThrough]
 		private void Skip(int count = 1)
 		{
-			_lexemeId = Math.Min(_lexemeId + count, _lexemes.Length - 1);
+			_lexemId = Math.Min(_lexemId + count, _lexems.Length - 1);
 		}
 
 		/// <summary>
@@ -129,7 +154,7 @@ namespace VkScript.Parser.Parser
 		private bool IsStatementSeparator()
 		{
 			return Check(VkScriptLexemeType.NewLine)
-					|| _lexemes[_lexemeId - 1].Type == VkScriptLexemeType.Dedent;
+					|| _lexems[_lexemId - 1].Type == VkScriptLexemeType.Dedent;
 		}
 
 		/// <summary>
@@ -141,12 +166,12 @@ namespace VkScript.Parser.Parser
 		private T Attempt<T>(Func<T> getter)
 			where T : LocationEntity
 		{
-			var backup = _lexemeId;
+			var backup = _lexemId;
 			var result = Bind(getter);
 
 			if (result == null)
 			{
-				_lexemeId = backup;
+				_lexemId = backup;
 			}
 
 			return result;
@@ -159,12 +184,12 @@ namespace VkScript.Parser.Parser
 		[UsedImplicitly]
 		private List<T> Attempt<T>(Func<List<T>> getter)
 		{
-			var backup = _lexemeId;
+			var backup = _lexemId;
 			var result = getter();
 
 			if (result == null || result.Count == 0)
 			{
-				_lexemeId = backup;
+				_lexemId = backup;
 			}
 
 			return result;
@@ -196,8 +221,8 @@ namespace VkScript.Parser.Parser
 		private T Bind<T>(Func<T> getter)
 			where T : LocationEntity
 		{
-			var startId = _lexemeId;
-			var start = _lexemes[_lexemeId];
+			var startId = _lexemId;
+			var start = _lexems[_lexemId];
 
 			var result = getter();
 
@@ -208,11 +233,11 @@ namespace VkScript.Parser.Parser
 
 			result.StartLocation = start.StartLocation;
 
-			var endId = _lexemeId;
+			var endId = _lexemId;
 
 			if (endId > startId && endId > 0)
 			{
-				result.EndLocation = _lexemes[_lexemeId - 1].EndLocation;
+				result.EndLocation = _lexems[_lexemId - 1].EndLocation;
 			}
 
 			return result;
