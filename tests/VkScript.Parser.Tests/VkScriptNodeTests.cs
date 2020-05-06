@@ -1,4 +1,5 @@
 using Moq.AutoMock;
+using VkScript.Parser.SyntaxTree.ControlFlow;
 using VkScript.Parser.SyntaxTree.Operators.Binary;
 using Xunit;
 
@@ -31,10 +32,19 @@ namespace VkScript.Parser.Tests
 
 			Assert.NotNull(node);
 		}
+
 		[Fact]
 		public void PlusOperatorNode()
 		{
 			var node = _mocker.CreateInstance<VkScriptPlusOperatorNode>();
+
+			Assert.NotNull(node);
+		}
+
+		[Fact]
+		public void IfNode()
+		{
+			var node = _mocker.CreateInstance<VkScriptIfNode>();
 
 			Assert.NotNull(node);
 		}
