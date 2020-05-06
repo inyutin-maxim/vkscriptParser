@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using JetBrains.Annotations;
 using VkScript.Parser.Abstractions;
@@ -13,7 +13,7 @@ namespace VkScript.Parser.Parser
 		/// <inheritdoc />
 		public IEnumerable<VkScriptSyntaxNode> Parse(IEnumerable<VkScriptLexeme> lexemes)
 		{
-			_lexemes = lexemes.ToImmutableArray();
+			_lexems = lexemes.ToImmutableArray();
 
 			return ParseMain();
 		}
@@ -43,12 +43,12 @@ namespace VkScript.Parser.Parser
 		/// <summary>
 		/// Список источников лексем.
 		/// </summary>
-		private ImmutableArray<VkScriptLexeme> _lexemes;
+		private ImmutableArray<VkScriptLexeme> _lexems;
 
 		/// <summary>
 		/// Текущий индекс лексемы в потоке.
 		/// </summary>
-		private int _lexemeId;
+		private int _lexemId;
 
 	#endregion
 

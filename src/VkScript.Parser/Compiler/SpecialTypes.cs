@@ -1,9 +1,9 @@
-﻿namespace VkScript.Parser.Compiler
+namespace VkScript.Parser.Compiler
 {
 	/// <summary>
 	/// Псевдотип, представляющий отсутствие значения (void).
 	/// </summary>
-	internal class UnitType
+	public class UnitType
 	{
 		public override string ToString()
 		{
@@ -33,5 +33,12 @@
 		}
 
 	#endregion
+	}
+
+	/// <summary>
+	/// Псевдотип, представляющий null значение
+	/// </summary>
+	public class NullType
+	{
 	}
 }

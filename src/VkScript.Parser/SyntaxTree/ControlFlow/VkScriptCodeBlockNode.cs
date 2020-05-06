@@ -10,7 +10,7 @@ namespace VkScript.Parser.SyntaxTree.ControlFlow
 {
 	public class VkScriptCodeBlockNode : VkScriptSyntaxNode, IEnumerable<VkScriptSyntaxNode>
 	{
-	#region Constructor
+		#region Constructor
 
 		public VkScriptCodeBlockNode(ScopeKind scopeKind = ScopeKind.Unclosured)
 		{
@@ -20,28 +20,52 @@ namespace VkScript.Parser.SyntaxTree.ControlFlow
 
 	#endregion
 
-	#region Fields
+		#region Fields
 
 		/// <summary>
-		/// The scope frame corresponding to current code block.
+		/// Область видимости соответствуюзая текущему блоку кода
 		/// </summary>
 		public Scope Scope { get; private set; }
 
 		/// <summary>
-		/// The statements to execute.
+		/// Операторы для выполнения
 		/// </summary>
 		public List<VkScriptSyntaxNode> Statements { get; set; }
 
-	#endregion
+		#endregion
 
-		public IEnumerator<VkScriptSyntaxNode> GetEnumerator()
-		{
-			return Statements.GetEnumerator();
-		}
+		#region IEnumerable<NodeBase> implementation
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
+			public IEnumerator<VkScriptSyntaxNode> GetEnumerator()
+			{
+				return Statements.GetEnumerator();
+			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
+
+			public void Add(VkScriptSyntaxNode node)
+			{
+				Statements.Add(node);
+			}
+
+			public void AddRange(params VkScriptSyntaxNode[] nodes)
+			{
+				Statements.AddRange(nodes);
+			}
+
+			public void AddRange(IEnumerable<VkScriptSyntaxNode> nodes)
+			{
+				Statements.AddRange(nodes);
+			}
+
+			public void Insert(VkScriptSyntaxNode node)
+			{
+				Statements.Insert(0, node);
+			}
+
+		#endregion
 	}
 }

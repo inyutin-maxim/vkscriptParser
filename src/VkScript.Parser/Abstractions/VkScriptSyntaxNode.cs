@@ -22,7 +22,7 @@ namespace VkScript.Parser.Abstractions
 		/// <summary>
 		/// Проверяет, является ли текущий узел константой.
 		/// </summary>
-		protected virtual bool IsConstant => false;
+		public virtual bool IsConstant => false;
 
 		/// <summary>
 		/// Возвращает постоянное значение, соответствующее текущему узлу.
